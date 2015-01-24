@@ -19,3 +19,12 @@ Next 5 letters
 HiRes = High Resolution - 300 dpi (Best original quality shy vector, ok print quality)
 MiRes = Mid resolution - 90dpi standard screen render
 LoRes = Low Resolution -  small screen, 
+
+
+Next xxx letters
+description
+either what the card is or example, place holder, or blank tutorial card
+PN = Proper Noun
+
+
+
