@@ -1,0 +1,21 @@
+Example: GC_Back_HiRes_BlankExample.png
+
+First 2 letters
+GC = Goal Card
+WC = Word Card
+PT = Pronoun Token
+CT = Conjunction Token
+
+Next 4 letters
+Back = back of cards
+Pron = Pronoun
+Adj. = Adjective
+Adv. = Adverb
+Noun = Noun
+Verb = Verb
+Conj = Conjuntion
+
+Next 5 letters
+HiRes = High Resolution - 300 dpi (Best original quality shy vector, ok print quality)
+MiRes = Mid resolution - 90dpi standard screen render
+LoRes = Low Resolution -  small screen, 

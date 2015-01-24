@@ -25,8 +25,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.398892"
-     inkscape:cx="712.32514"
-     inkscape:cy="221.38138"
+     inkscape:cx="330.67481"
+     inkscape:cy="472.53687"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -57,7 +57,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -78,21 +78,6 @@
        inkscape:export-filename="C:\Users\Beast\Desktop\Spinner\WordCardNounExampleOrig300DPI.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
-    <text
-       xml:space="preserve"
-       style="font-size:32px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-       x="202.5"
-       y="636.112"
-       id="text3757"
-       sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Beast\Desktop\Spinner\WordCardVerbExampleOrig300DPI.png"
-       inkscape:export-xdpi="300"
-       inkscape:export-ydpi="300"><tspan
-         sodipodi:role="line"
-         id="tspan3759"
-         x="202.5"
-         y="636.112"
-         style="font-size:28px;text-align:center;text-anchor:middle">Noun</tspan></text>
     <rect
        ry="11.178571"
        rx="11.150001"
@@ -105,21 +90,6 @@
        inkscape:export-filename="C:\Users\Beast\Desktop\Spinner\WordCardVerbExampleOrig300DPI.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
-    <text
-       sodipodi:linespacing="125%"
-       id="text3763"
-       y="636.112"
-       x="382.5"
-       style="font-size:32px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-       xml:space="preserve"
-       inkscape:export-filename="C:\Users\Beast\Desktop\Spinner\WordCardVerbExampleOrig300DPI.png"
-       inkscape:export-xdpi="300"
-       inkscape:export-ydpi="300"><tspan
-         y="636.112"
-         x="382.5"
-         id="tspan3765"
-         sodipodi:role="line"
-         style="font-size:18px;text-align:center;text-anchor:middle">Action</tspan></text>
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3767"
@@ -147,14 +117,14 @@
     <text
        sodipodi:linespacing="125%"
        id="text3775"
-       y="591.112"
+       y="579.862"
        x="832.5"
        style="font-size:32px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
        xml:space="preserve"
        inkscape:export-filename="C:\Users\Beast\Desktop\Spinner\WordCardAdverbExampleOrig300DPI.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
-         y="591.112"
+         y="579.862"
          x="832.5"
          sodipodi:role="line"
          id="tspan3779"
@@ -229,7 +199,7 @@
        width="176"
        height="176"
        x="69.5"
-       y="379.36203"
+       y="368.112"
        rx="8"
        ry="10.748092"
        inkscape:export-filename="C:\Users\Beast\Desktop\Spinner\WordCardNounExampleOrig300DPI.png"
@@ -268,7 +238,7 @@
     <rect
        ry="10.748092"
        rx="8"
-       y="379.36203"
+       y="368.112"
        x="294.5"
        height="176"
        width="176"
@@ -311,7 +281,7 @@
        xml:space="preserve"
        style="font-size:32px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
        x="157.5"
-       y="591.112"
+       y="579.862"
        id="text3043"
        sodipodi:linespacing="125%"
        inkscape:export-filename="C:\Users\Beast\Desktop\Spinner\WordCardNounExampleOrig300DPI.png"
@@ -321,12 +291,12 @@
          sodipodi:role="line"
          id="tspan3045"
          x="157.5"
-         y="591.112">Player Name</tspan></text>
+         y="579.862">Player Name</tspan></text>
     <rect
        ry="10.748092"
        rx="8"
-       y="379.1423"
-       x="519.43848"
+       y="368.112"
+       x="519.5"
        height="176"
        width="176"
        id="rect3051"
@@ -370,7 +340,7 @@
        width="176"
        height="176"
        x="744.5"
-       y="379.362"
+       y="368.112"
        rx="8"
        ry="10.748093"
        inkscape:export-filename="C:\Users\Beast\Desktop\Spinner\WordCardAdverbExampleOrig300DPI.png"
@@ -409,44 +379,29 @@
     <text
        sodipodi:linespacing="125%"
        id="text3071"
-       y="591.112"
+       y="579.862"
        x="607.5"
        style="font-size:32px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
        xml:space="preserve"
        inkscape:export-filename="C:\Users\Beast\Desktop\Spinner\WordCardAdjectiveExampleOrig300DPI.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
-         y="591.112"
+         y="579.862"
          x="607.5"
          id="tspan3073"
          sodipodi:role="line"
          style="font-size:28px;text-align:center;text-anchor:middle">Adjective</tspan></text>
     <text
-       xml:space="preserve"
-       style="font-size:32px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-       x="160.81445"
-       y="635.78387"
-       id="text3843"
-       sodipodi:linespacing="125%"
-       inkscape:export-filename="C:\Users\Beast\Desktop\Spinner\WordCardNounExampleOrig300DPI.png"
-       inkscape:export-xdpi="300"
-       inkscape:export-ydpi="300"><tspan
-         style="font-size:18px;text-align:center;text-anchor:middle"
-         sodipodi:role="line"
-         id="tspan3845"
-         x="160.81445"
-         y="635.78387">Person</tspan></text>
-    <text
        sodipodi:linespacing="125%"
        id="text3847"
-       y="591.112"
+       y="579.862"
        x="382.5"
        style="font-size:32px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
        xml:space="preserve"
        inkscape:export-filename="C:\Users\Beast\Desktop\Spinner\WordCardVerbExampleOrig300DPI.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"><tspan
-         y="591.112"
+         y="579.862"
          x="382.5"
          id="tspan3849"
          sodipodi:role="line"
@@ -469,7 +424,7 @@
        width="176"
        height="176"
        x="519.5"
-       y="739.362"
+       y="728.112"
        rx="8"
        ry="10.748092"
        inkscape:export-filename="C:\Users\Beast\Desktop\Spinner\GoalCardExampleOrig300DPI.png"
@@ -508,8 +463,8 @@
     <text
        xml:space="preserve"
        style="font-size:32px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-       x="607.56152"
-       y="951.33173"
+       x="607.5"
+       y="939.862"
        id="text3863"
        sodipodi:linespacing="125%"
        inkscape:export-filename="C:\Users\Beast\Desktop\Spinner\GoalCardExampleOrig300DPI.png"
@@ -518,7 +473,107 @@
          style="font-size:28px;text-align:center;text-anchor:middle"
          sodipodi:role="line"
          id="tspan3865"
-         x="607.56152"
-         y="951.33173">Goal</tspan></text>
+         x="607.5"
+         y="939.862">Goal</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+       x="831.11328"
+       y="602.362"
+       id="text3867"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="832.5"
+         y="602.362"
+         style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+         id="tspan3871">Modifies or qualifies an adjective, verb,  </tspan><tspan
+         sodipodi:role="line"
+         x="831.11328"
+         y="614.862"
+         style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+         id="tspan3873">adverb expressing a relation to them</tspan><tspan
+         sodipodi:role="line"
+         x="831.11328"
+         y="627.39203"
+         style="font-size:10px;font-style:oblique;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Oblique"
+         id="tspan3885">Example:</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3887"
+       y="602.362"
+       x="606.11328"
+       style="font-size:32px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+       xml:space="preserve"><tspan
+         id="tspan3891"
+         style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+         y="602.362"
+         x="607.5"
+         sodipodi:role="line">Naming an attribute, added to or grammatically </tspan><tspan
+         style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+         y="614.862"
+         x="606.11328"
+         sodipodi:role="line"
+         id="tspan3050">related to a noun to modify or describe it.</tspan><tspan
+         id="tspan3893"
+         style="font-size:10px;font-style:oblique;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Oblique"
+         y="627.39203"
+         x="606.11328"
+         sodipodi:role="line">Example:</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+       x="382.5"
+       y="602.362"
+       id="text3895"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="382.5"
+         y="602.362"
+         style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+         id="tspan3919">Describe an action, state, occurrence,</tspan><tspan
+         sodipodi:role="line"
+         x="382.5"
+         y="614.862"
+         style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+         id="tspan3923">or a relation between two things</tspan><tspan
+         sodipodi:role="line"
+         x="382.5"
+         y="627.39203"
+         style="font-size:10px;font-style:oblique;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Oblique"
+         id="tspan3901">Example: hears, becomes, happens.</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3903"
+       y="602.362"
+       x="156.11328"
+       style="font-size:32px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+       xml:space="preserve"><tspan
+         style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+         y="602.362"
+         x="157.5"
+         sodipodi:role="line"
+         id="tspan3913">People, places, or things </tspan><tspan
+         id="tspan3909"
+         style="font-size:10px;font-style:oblique;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Oblique"
+         y="614.89203"
+         x="156.11328"
+         sodipodi:role="line">Example:</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
+       x="606.11328"
+       y="962.362"
+       id="text3048"
+       sodipodi:linespacing="125%"><tspan
+         id="tspan3053"
+         sodipodi:role="line"
+         x="606.11328"
+         y="962.362"
+         style="font-size:10px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans">Goal text here</tspan><tspan
+         sodipodi:role="line"
+         x="606.11328"
+         y="974.89203"
+         style="font-size:10px;font-style:oblique;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Oblique"
+         id="tspan3056">Example:</tspan></text>
   </g>
 </svg>
