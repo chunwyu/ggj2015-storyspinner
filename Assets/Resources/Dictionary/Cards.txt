@@ -1,0 +1,17 @@
+"data": {
+        "CardArray": [
+            {
+    		"title": "horse",
+    		"description": "blue",
+    		"type": 1,
+    		"graphicPath": "blue"
+            }
+            {
+    		"title": "bull",
+    		"description": "blue",
+    		"type": 1,
+    		"graphicPath": "blue"
+            }
+
+        ]
+    }
