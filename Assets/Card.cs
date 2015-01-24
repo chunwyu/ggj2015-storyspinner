@@ -8,22 +8,39 @@ public enum WordType
     Adjective
 };
 
-public class Card : MonoBehaviour {
+public class CardData
+{
+    public string title;
+    public string description;
+    public string graphicPath;
+    public WordType type;
 
-    string title;
-    string description;
-    string graphicPath;
-    WordType type;
+    public override string ToString()
+    {
+        string strType = "";
+        switch (type)
+        {
+            case WordType.Noun: strType = "Noun"; break;
+            case WordType.Verb: strType = "Verb"; break;
+            case WordType.Adjective: strType = "Adjective"; break;
+            default: strType = "UNKNOWN_TYPE"; break;
+        }
+
+        return string.Format("Card {0} {1} {2}", strType, title, description);
+    }
+}
+
+public class Card : MonoBehaviour {
+    public CardData data;
 
 	// Use this for initialization
 	void Start () {
-        this.type = WordType.Noun; //default
 	}
 
     void Init ()
     {
         // (1) placeholder card image
-        if (type == WordType.Noun)
+        if (data.type == WordType.Noun)
         {
             SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = Resources.Load<Sprite>("Origs/WordCardNounExampleOrig300DPI");
