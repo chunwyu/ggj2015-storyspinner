@@ -57,10 +57,10 @@ public class DataAccess : MonoBehaviour {
         }
     }
 
-    public List<Card> readCard()
+    public List<CardData> readCard()
     {
         string data = string.Empty;
-        List<Card> cardList = new List<Card>();
+        List<CardData> cardList = new List<CardData>();
         //Card card = new Card();
         //data = System.IO.File.ReadAllText(Application.dataPath);
 
@@ -73,19 +73,29 @@ public class DataAccess : MonoBehaviour {
         results = j.GetField("data");
         foreach (JSONObject c in results.list)
         {
+            CardType x = CardType.Noun;
+            
+            switch ((int)results.GetField("type").n)
+            {
+                case 0: x = CardType.Noun; break;
+                case 1: x = CardType.Verb; break;
+                case 2: x = CardType.Adjective; break;
+                case 3: x = CardType.Goal; break;
+            }
+
             CardData card = new CardData()
             {
                 title = results.GetField("title").str,
                 description = results.GetField("description").str,
-                graphicPath = results.GetField("graphicPath").str
-                //type = results.GetField("type").n
+                graphicPath = results.GetField("graphicPath").str,
+               type = x
+
             };
-            Debug.Log(card);
+            Debug.Log(card.ToString());
+            cardList.Add(card);
         }
 
-
-
-        return null;
+        return cardList;
     }
 
             
