@@ -16,6 +16,7 @@ public enum GameState
 
 public class Game : MonoBehaviour {
     private int HandSizeLimit = 7;
+    private int ScoringLimit = 10;
 
     private List<Player> players;
     private Queue<Player> turnQueue;
@@ -98,6 +99,27 @@ public class Game : MonoBehaviour {
         else if (gameState == GameState.MakeStory)
         {
             ProcessTurn();
+
+            /* At some condition:
+             * gameState = GameState.ScoringVote;
+             */
+        }
+        else if (gameState == GameState.ScoringVote)
+        {
+            ScoringVote();
+            //After votes:
+            foreach (Player p in players)
+            {
+                if (p.score > ScoringLimit)
+                {
+                    gameState = GameState.GameEnd;
+                }
+            }
+            gameState = GameState.DrawCards;
+        }
+        else if (gameState == GameState.GameEnd)
+        {
+            ProcessEndGame();
         }
 	}
 
@@ -240,5 +262,39 @@ public class Game : MonoBehaviour {
         {
             DealGoal(p);
         }
+    }
+
+    void ScoringVote()
+    {
+
+    }
+
+    void ProcessEndGame()
+    {
+        List<Player> ranking = new List<Player>(players);
+
+        // sort by score
+        ranking.Sort();
+
+        List<Player> winners = new List<Player>();
+
+        // top person
+        winners.Add(ranking[0]);
+
+        // look for ties
+        if (ranking.Count > 1)
+        {
+            for (int i = 1; i < ranking.Count; i++)
+            {
+                if (ranking[i] == ranking[0])
+                {
+                    winners.Add(ranking[i]);
+                }
+            }
+        }
+
+        // pop up the winner image
+        GameObject winnerDisplay = (GameObject)Instantiate(winnerDisplayObj);
+
     }
 }

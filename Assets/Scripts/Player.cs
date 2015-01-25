@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Player {
+public class Player : IComparable<Player> {
 
     public List<CardData> hand;
     public List<CardData> goals;
@@ -10,7 +11,7 @@ public class Player {
     public string playerName;
     public Game game;
     public NetworkPlayer mPlayer;
-    int points;
+    public int score;
 	
 	public Player ()
 	{
@@ -74,5 +75,11 @@ public class Player {
         }
 
         hand.Add(c);
+    }
+
+    // Sorting by score for ranking table
+    public int CompareTo(Player other)
+    {
+        return this.score - other.score;
     }
 }
