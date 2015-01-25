@@ -68,12 +68,11 @@ public class Card : MonoBehaviour {
         // (1) placeholder card image
         if (data.type == CardType.Noun)
         {
-            Sprite load = Resources.Load<Sprite>("CardBlanks/Noun_Card_Blank_HiRes");
-            cardBack.sprite = nounBlank;
+            cardBack.sprite = Resources.Load<Sprite>("CardBlanks/Noun_Card_Blank_HiRes");
         }
         else if (data.type == CardType.Adjective)
         {
-            cardBack.sprite = verbBlank;
+            cardBack.sprite = Resources.Load<Sprite>("CardBlanks/Adj._Card_Blank_HiRes");
         }
         else if (data.type == CardType.Verb)
         {
