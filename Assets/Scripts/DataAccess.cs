@@ -57,6 +57,8 @@ public class DataAccess : MonoBehaviour {
         }
     }
 
+
+
     public List<CardData> readCard()
     {
         string data = string.Empty;
@@ -67,10 +69,9 @@ public class DataAccess : MonoBehaviour {
         TextAsset saveLocation = new TextAsset();
         saveLocation = Resources.Load("Dictionary/Cards") as TextAsset;
         JSONObject j = new JSONObject(saveLocation.text);
-        JSONObject results = new JSONObject();
+        JSONObject results = new JSONObject(JSONObject.Type.ARRAY);
         accessData(j);
 
-        results = j.GetField("data");
         foreach (JSONObject c in results.list)
         {
             CardType x = CardType.Noun;
