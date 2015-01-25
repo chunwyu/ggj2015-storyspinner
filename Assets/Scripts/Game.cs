@@ -141,28 +141,27 @@ public class Game : MonoBehaviour {
 	            CardData nextCard = deck[deck.Count - 1];
 	            deck.RemoveAt(deck.Count - 1);
 	            p.AddCard (nextCard);
-<<<<<<< HEAD
+                MakeNewCardDisplay(nextCard);
+
 	            if (!p.Equals (mLocalPlayer))
 	            {
-	            	networkView.RPC ("RecieveCard", p.mPlayer, DataAccess.GetJSONfromCard (nextCard));
+                    //produces an error when called on the server that is meaningless but that i can't remove
+                    networkView.RPC("RecieveCard", p.mPlayer, DataAccess.GetJSONfromCard(nextCard));
 	        	}
-                else
-                {
-                    GameObject newCard = (GameObject)GameObject.Instantiate(mCardButtonObj);
-                    Card cardScript = newCard.GetComponent<Card>();
-
-                    RectTransform newTransform = newCard.GetComponent<RectTransform>();
-                    newTransform.SetParent(mCardList.transform, false);
-
-                    cardScript.data = nextCard;
-                    cardScript.Init();
-                }
-=======
-				//produces an error when called on the server that is meaningless but that i can't remove
-	            networkView.RPC ("RecieveCard", p.mPlayer, DataAccess.GetJSONfromCard (nextCard));
->>>>>>> origin/master
 	        }
         }
+    }
+
+    void MakeNewCardDisplay(CardData newCard)
+    {
+        GameObject newCardObj = (GameObject)GameObject.Instantiate(mCardButtonObj);
+        Card cardScript = newCardObj.GetComponent<Card>();
+
+        RectTransform newTransform = newCardObj.GetComponent<RectTransform>();
+        newTransform.SetParent(mCardList.transform, false);
+
+        cardScript.data = newCard;
+        cardScript.Init();
     }
     
     [RPC]
@@ -170,6 +169,8 @@ public class Game : MonoBehaviour {
     {
     	CardData data = DataAccess.GetCardFromJSON (cardData);
     	mLocalPlayer.AddCard (data);
+
+        MakeNewCardDisplay(data);
     }
 
     void DealGoal(Player p)
