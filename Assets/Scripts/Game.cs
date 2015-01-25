@@ -37,6 +37,8 @@ public class Game : MonoBehaviour {
     public GameObject mPrefixPanel;
     public InputField mPrefixInput;
     
+    public GameObject mVotingPanel;
+    
     private Player mLocalPlayer;
     private bool mbIsMyTurn;
     private bool mbNextTurnReady;
@@ -61,7 +63,7 @@ public class Game : MonoBehaviour {
 
         // Placeholder: starting at DrawCards until net connection code is in
 
-        gameState = GameState.MainMenu;
+		gameState = GameState.MainMenu;
         mLocalPlayer = new Player ();
         winnerShown = false;
         mbNextTurnReady = true;
@@ -130,7 +132,7 @@ public class Game : MonoBehaviour {
         else if (gameState == GameState.MakeStory)
         {
             ProcessTurn();
-
+			SetUpBoard ();
             /* At some condition:
              * gameState = GameState.ScoringVote;
              */
@@ -146,7 +148,7 @@ public class Game : MonoBehaviour {
                     gameState = GameState.GameEnd;
                 }
             }
-            gameState = GameState.DrawCards;
+            gameState = GameState.MakeStory;
         }
         else if (gameState == GameState.GameEnd)
         {
@@ -212,6 +214,7 @@ public class Game : MonoBehaviour {
             }
 
         }
+        ShuffleDecks ();
 
         // TODO: Load cards from database instead of this placeholder
         //for (int i = 0; i < 40; i++)
@@ -229,6 +232,24 @@ public class Game : MonoBehaviour {
         //    c.title = string.Format("Test goal {0}", i);
         //    goalDeck.Add(c);
         //}
+    }
+    
+    void ShuffleDecks()
+    {
+    	for (int i = 0; i < deck.Count; i++)
+    	{
+    		int random = (int) (Random.value * (deck.Count - 1));
+    		var temp = deck[i];
+    		deck[i] = deck[random];
+    		deck[random] = temp;
+    	}
+		for (int i = 0; i < goalDeck.Count; i++)
+		{
+			int random = (int) (Random.value * (goalDeck.Count - 1));
+			var temp = goalDeck[i];
+			goalDeck[i] = goalDeck[random];
+			goalDeck[random] = temp;
+		}
     }
 	
 	
@@ -252,9 +273,22 @@ public class Game : MonoBehaviour {
     
     void SetUpBoard ()
     {
+    	bool bCardFound;
     	foreach (CardData card in mLocalPlayer.hand)
     	{
-    		MakeNewCardDisplay (card);
+    		bCardFound = false;
+    		foreach (Transform child in mCardList.transform)
+    		{
+    			Card c = child.GetComponent <Card> ();
+    			if (c.data.title.Equals (card.title))
+    			{
+    				bCardFound = true;
+    			}
+    		}
+    		if (!bCardFound)
+    		{
+				MakeNewCardDisplay (card);
+			}
     	}
     }
     
@@ -269,8 +303,6 @@ public class Game : MonoBehaviour {
     		//possibly display a dialog to allow players to add extra connectors between their words
     		
     		mPrefixPanel.SetActive (true);
-    		
-
     	}
     }
     
@@ -286,6 +318,8 @@ public class Game : MonoBehaviour {
 		}
 		mbIsMyTurn = false;
 		mPrefixPanel.SetActive (false);
+		mLocalPlayer.hand.Remove (mCurrentlySelectedCard.data);
+		Destroy (mCurrentlySelectedCard.data.gameObj);
     }
     
     public void CancelSelection ()
@@ -301,6 +335,7 @@ public class Game : MonoBehaviour {
     	networkView.RPC ("DistributeStory", RPCMode.All, mPlayedText.text);
     	mbNextTurnReady = true;
     	mPrefixInput.text = "";
+    	DealCard (currentPlayer);
     }
     
     [RPC]
