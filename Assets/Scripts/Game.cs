@@ -40,6 +40,11 @@ public class Game : MonoBehaviour {
     public RectTransform mDropZone;
     public Text mPlayedText;
 
+    public GameObject mWinnerDisplayObj;
+    public GameObject mWinnerTextObj;
+    public GameObject mCanvas;
+    private bool winnerShown;
+
 	// Use this for initialization
 	void Start () {
         deck = new List<CardData>();
@@ -49,8 +54,10 @@ public class Game : MonoBehaviour {
 
         // Placeholder: starting at DrawCards until net connection code is in
 
-        gameState = GameState.MainMenu;
+        gameState = GameState.GameEnd;
         mLocalPlayer = new Player ();
+
+        winnerShown = false;
 	}
 
     public void AddPlayer(string name, NetworkPlayer player)
@@ -136,7 +143,11 @@ public class Game : MonoBehaviour {
         }
         else if (gameState == GameState.GameEnd)
         {
-            ProcessEndGame();
+            if (!winnerShown)
+            {
+                ProcessEndGame();
+            }
+            winnerShown = true;
         }
 	}
 
@@ -228,7 +239,7 @@ public class Game : MonoBehaviour {
         newTransform.SetParent(mCardList.transform, false);
 
         cardScript.data = cardData;
-        cardScript.Init();
+        cardScript.Init(this, mDropZone);
     }
 
     void MakeNewCardDisplay(CardData newCard)
@@ -320,10 +331,24 @@ public class Game : MonoBehaviour {
 
     void ProcessEndGame()
     {
+        Player p1 = new Player();
+        p1.score = 17;
+        p1.playerName = "Mike";
+        Player p2 = new Player();
+        p2.score = 17;
+        p2.playerName = "Ed";
+        Player p3 = new Player();
+        p3.score = 17;
+        p3.playerName = "Thomas";
+        players.Add(p1);
+        players.Add(p2);
+        players.Add(p3);
+
         List<Player> ranking = new List<Player>(players);
 
         // sort by score
         ranking.Sort();
+        ranking.Reverse();
 
         List<Player> winners = new List<Player>();
 
@@ -335,7 +360,7 @@ public class Game : MonoBehaviour {
         {
             for (int i = 1; i < ranking.Count; i++)
             {
-                if (ranking[i] == ranking[0])
+                if (ranking[i].score == winners[0].score)
                 {
                     winners.Add(ranking[i]);
                 }
@@ -343,8 +368,19 @@ public class Game : MonoBehaviour {
         }
 
         // pop up the winner image
-        GameObject winnerDisplay = (GameObject)Instantiate(winnerDisplayObj);
+        GameObject winnerDisplay = (GameObject)Instantiate(mWinnerDisplayObj);
+        RectTransform winnerRect = winnerDisplay.GetComponent<RectTransform>();
+        winnerRect.SetParent(mCanvas.transform, false);
 
+        foreach (Player winner in winners)
+        {
+            GameObject winnerTextObj = (GameObject)Instantiate(mWinnerTextObj);
+            Text winnerText = winnerTextObj.GetComponent<Text>();
+            winnerText.text = winner.playerName;
+            RectTransform newTextTransform = winnerTextObj.GetComponent<RectTransform>();
+            newTextTransform.SetParent(winnerDisplay.transform, false);
+        }
+    }
     
     public void CardPlayed (CardData card)
     {
