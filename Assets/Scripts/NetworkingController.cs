@@ -6,13 +6,15 @@ public class NetworkingController : MonoBehaviour
 	//constants for game type and name
 	private const string TYPE_NAME = "TaleSpinner";
 	private const string GAME_NAME = "RoomName";
-	private const string SERVER_IP = "localhost";
+	private const string SERVER_IP = "24.19.57.246";
 	private const int LISTEN_PORT = 25000;
 	private const int MAX_CONNECTIONS = 8;
 	
 	private HostData [] mHostList;
 	
 	public InputField mRoomName;
+	public GameObject mPlayerListing;
+	public GameObject mErrorMessage;
 	
 	public void RefreshHostList ()
 	{
@@ -52,14 +54,15 @@ public class NetworkingController : MonoBehaviour
 					Debug.Log ("Connecting to server " + mHostList[i].gameName);
 				}
 			}
-			if (!bConnected)
-			{
-				//No open spots in games, show error
-			}
+		}
+		
+		if (!bConnected)
+		{
+			mErrorMessage.SetActive (true);
 		}
 		else
 		{
-			//No currently existing games, show error
+			mPlayerListing.SetActive (true);
 		}
 	}
 	
@@ -83,6 +86,7 @@ public class NetworkingController : MonoBehaviour
 	public void UnregisterServer ()
 	{
 		MasterServer.UnregisterHost ();
+		Network.maxConnections = -1;
 	}
 	
 	void OnServerInitialized ()
