@@ -13,6 +13,7 @@ public class GameLobby : MonoBehaviour
 	public Animator mPlayerListAnimation;
 	public Button mStartButton;
 	public Game mGame;
+	public GameObject mTextDisplay;
 		
 	private string[] mPlayers;
 	private string mLocalPlayerName;
@@ -209,7 +210,6 @@ public class GameLobby : MonoBehaviour
 		if (bAllReady)
 		{
 			networkView.RPC ("RPCStartGame", RPCMode.All);
-			mGame.ChangeState (GameState.Loading);
 		}
 	}
 	
@@ -218,6 +218,8 @@ public class GameLobby : MonoBehaviour
 	{
 		//CODE TO START GAME
 		ActivateMenu ();
+		mGame.ChangeState (GameState.Loading);
+		mTextDisplay.SetActive (true);
 		//mStartButton.gameObject.SetActive (false);
 	}
 	
