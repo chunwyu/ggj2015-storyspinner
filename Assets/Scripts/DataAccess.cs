@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class DataAccess : MonoBehaviour {
-
-    public List<CardData> readCard()
+    
     public static List<CardData> readCard()
     {
         string data = string.Empty;
