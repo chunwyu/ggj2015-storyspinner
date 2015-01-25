@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,6 +11,7 @@ public enum GameState
     WaitingForConnections,
     DrawCards,
     DrawGoals,
+    SetupBoard,
     MakeStory,
     ScoringVote,
     GameEnd
@@ -32,6 +35,10 @@ public class Game : MonoBehaviour {
     public GameObject mCardList;
     
     private Player mLocalPlayer;
+    private bool mbIsMyTurn;
+    
+    public RectTransform mDropZone;
+    public Text mPlayedText;
 
 	// Use this for initialization
 	void Start () {
@@ -46,7 +53,7 @@ public class Game : MonoBehaviour {
         mLocalPlayer = new Player ();
 	}
 
-    public void AddPlayer(string name, bool isYou, NetworkPlayer player)
+    public void AddPlayer(string name, NetworkPlayer player)
     {
         Player newPlayer = new Player (name, this, player);
         newPlayer.playerName = name;
@@ -54,6 +61,11 @@ public class Game : MonoBehaviour {
 		if (player.Equals (Network.player))
 		{
 			newPlayer.isYou = true;
+			mLocalPlayer = newPlayer;
+		}
+		else if (player.guid.Equals ("0"))
+		{
+			//this is the server, and it is us
 			mLocalPlayer = newPlayer;
 		}
 		else
@@ -94,7 +106,12 @@ public class Game : MonoBehaviour {
                 turnQueue.Enqueue(p);
             }
 
-            gameState = GameState.MakeStory;
+            gameState = GameState.SetupBoard;
+        }
+        else if (gameState == GameState.SetupBoard)
+        {
+        	SetUpBoard ();
+        	gameState = GameState.MakeStory;
         }
         else if (gameState == GameState.MakeStory)
         {
@@ -130,9 +147,18 @@ public class Game : MonoBehaviour {
 	        if (currentPlayer == null)
 	        {
 	            currentPlayer = turnQueue.Dequeue();
+	            //TURN LOGIC GOES HERE
+	            networkView.RPC ("ReceiveTurn", currentPlayer.mPlayer);
+	            
 	            turnQueue.Enqueue(currentPlayer);
 	        }
         }
+    }
+    
+    [RPC]
+    void RecieveTurn ()
+    {
+    	mbIsMyTurn = true;
     }
 
     void LoadGame()
@@ -165,15 +191,31 @@ public class Game : MonoBehaviour {
 	            CardData nextCard = deck[deck.Count - 1];
 	            deck.RemoveAt(deck.Count - 1);
 	            p.AddCard (nextCard);
-                MakeNewCardDisplay(nextCard);
 
-	            if (!p.Equals (mLocalPlayer))
+	            if (!mLocalPlayer.mPlayer.Equals (p.mPlayer))
 	            {
-                    //produces an error when called on the server that is meaningless but that i can't remove
                     networkView.RPC("RecieveCard", p.mPlayer, DataAccess.GetJSONfromCard(nextCard));
 	        	}
 	        }
         }
+    }
+    
+    void SetUpBoard ()
+    {
+    	foreach (CardData card in mLocalPlayer.hand)
+    	{
+    		MakeNewCardDisplay (card);
+    	}
+    }
+    
+    
+    public void ClickEventMethod (Button b)
+    {
+    	if (mbIsMyTurn)
+    	{
+    		Card selectedCard = b.gameObject.GetComponent <Card> ();
+    		Debug.Log ("Selected Card: " + selectedCard.data.title);
+    	}
     }
 
     // Sorry for duplication, but I figure I'd leave this open for adjustments.
@@ -198,7 +240,12 @@ public class Game : MonoBehaviour {
         newTransform.SetParent(mCardList.transform, false);
 
         cardScript.data = newCard;
-        cardScript.Init();
+        cardScript.Init(this, mDropZone);
+        
+        Button cardButton = newCardObj.GetComponent <Button> ();
+        cardButton.onClick.RemoveAllListeners ();
+        cardButton.onClick.AddListener ( () => ClickEventMethod(cardButton));
+        
     }
     
     [RPC]
@@ -207,7 +254,7 @@ public class Game : MonoBehaviour {
     	CardData data = DataAccess.GetCardFromJSON (cardData);
     	mLocalPlayer.AddCard (data);
 
-        MakeNewCardDisplay(data);
+        //MakeNewCardDisplay(data);
     }
 
     void DealGoal(Player p)
@@ -219,8 +266,10 @@ public class Game : MonoBehaviour {
 	            CardData nextGoal = goalDeck[goalDeck.Count - 1];
 	            goalDeck.RemoveAt(goalDeck.Count - 1);
 	            p.AddGoal(nextGoal);
-				//produces an error when called on the server that is meaningless but that i can't remove
-	            networkView.RPC ("RecieveCard", p.mPlayer, DataAccess.GetJSONfromCard (nextGoal));
+				if (!mLocalPlayer.mPlayer.Equals (p.mPlayer))
+				{
+	            	networkView.RPC ("RecieveGoal", p.mPlayer, DataAccess.GetJSONfromCard (nextGoal));
+	            }
 	        }
         }
         // TODO else { reshuffle }
@@ -296,11 +345,9 @@ public class Game : MonoBehaviour {
         // pop up the winner image
         GameObject winnerDisplay = (GameObject)Instantiate(winnerDisplayObj);
 
-=======
     
     public void CardPlayed (CardData card)
     {
     	mPlayedText.text += card.title;
->>>>>>> origin/master
     }
 }
