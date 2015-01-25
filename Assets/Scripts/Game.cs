@@ -296,5 +296,11 @@ public class Game : MonoBehaviour {
         // pop up the winner image
         GameObject winnerDisplay = (GameObject)Instantiate(winnerDisplayObj);
 
+=======
+    
+    public void CardPlayed (CardData card)
+    {
+    	mPlayedText.text += card.title;
+>>>>>>> origin/master
     }
 }
