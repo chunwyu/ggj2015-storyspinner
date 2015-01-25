@@ -174,22 +174,40 @@ public class Game : MonoBehaviour {
 
     void LoadGame()
     {
-        // TODO: Load cards from database instead of this placeholder
-        for (int i = 0; i < 40; i++)
+
+        DataAccess da = new DataAccess();
+        List<CardData> cardList = new List<CardData>();
+        cardList = da.readCard();
+
+        foreach (var c in cardList)
         {
-            CardData c = new CardData();
-            c.type = CardType.Noun;
-            c.title = string.Format("Test card {0}", i);
-            deck.Add(c);
+            if (c.type != CardType.Goal)
+            {
+                deck.Add(c);
+            }
+            else
+            {
+                goalDeck.Add(c);
+            }
+
         }
 
-        for (int i = 0; i < 40; i++)
-        {
-            CardData c = new CardData();
-            c.type = CardType.Goal;
-            c.title = string.Format("Test goal {0}", i);
-            goalDeck.Add(c);
-        }
+        // TODO: Load cards from database instead of this placeholder
+        //for (int i = 0; i < 40; i++)
+        //{
+        //    CardData c = new CardData();
+        //    c.type = CardType.Noun;
+        //    c.title = string.Format("Test card {0}", i);
+        //    deck.Add(c);
+        //}
+
+        //for (int i = 0; i < 40; i++)
+        //{
+        //    CardData c = new CardData();
+        //    c.type = CardType.Goal;
+        //    c.title = string.Format("Test goal {0}", i);
+        //    goalDeck.Add(c);
+        //}
     }
 	
 	
