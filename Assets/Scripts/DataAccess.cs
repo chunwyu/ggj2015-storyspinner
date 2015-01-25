@@ -71,27 +71,29 @@ public class DataAccess : MonoBehaviour {
         JSONObject card = new JSONObject(data);
         CardData newCard = new CardData();
 
-        foreach (JSONObject cardElements in card.list)
+        CardType x;
+				
+		JSONObject type = card.GetField ("type");
+		int n = (int)type.n;
+		x = (CardType) n;
+        
+        /*switch (n)
         {
-                CardType x = CardType.Noun;
+            case 0: x = CardType.Noun; break;
+            case 1: x = CardType.Verb; break;
+            case 2: x = CardType.Adjective; break;
+            case 3: x = CardType.Goal; break;
+			default: x = CardType.Noun; break;
+        }*/
 
-                switch ((int)cardElements.GetField("type").n)
-                {
-                    case 0: x = CardType.Noun; break;
-                    case 1: x = CardType.Verb; break;
-                    case 2: x = CardType.Adjective; break;
-                    case 3: x = CardType.Goal; break;
-                }
-
-                newCard = new CardData()
-                {
-                    title = cardElements.GetField("title").str,
-                    description = cardElements.GetField("description").str,
-                    graphicPath = cardElements.GetField("graphicPath").str,
-                    type = x
-
-                };
-        }
+        newCard = new CardData()
+        {
+            title = card.GetField("title").str,
+            description = card.GetField("description").str,
+            graphicPath = card.GetField("graphicPath").str,
+            type = x
+        };
+       
 
         return newCard;
     }
