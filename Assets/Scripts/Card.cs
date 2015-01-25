@@ -18,7 +18,7 @@ public class CardData
     public CardType type;
     public GameObject gameObj;
 
-    public override string ToString()
+    public string getTypeString(CardType type)
     {
         string strType = "";
         switch (type)
@@ -29,8 +29,12 @@ public class CardData
             case CardType.Goal: strType = "Goal"; break;
             default: strType = "UNKNOWN_TYPE"; break;
         }
+        return strType;
+    }
 
-        return string.Format("Card {0} {1} {2}", strType, title, description);
+    public override string ToString()
+    {
+        return string.Format("Card {0} {1} {2}", getTypeString(type), title, description);
     }
 }
 
@@ -43,6 +47,11 @@ public class Card : MonoBehaviour {
 	public RectTransform mParent;
 	
 	public RectTransform mDropZone;
+
+    public Sprite nounBlank;
+    public Sprite verbBlank;
+    public Sprite adjectiveBlank;
+    public Sprite goalBlank;
 	
 	// Use this for initialization
 	void Start () {
@@ -54,31 +63,36 @@ public class Card : MonoBehaviour {
         DebugUtils.Assert(data.gameObj == null);
 
         data.gameObj = this.gameObject;
-        Image cardImage = gameObject.GetComponent<Image>();
+        Image cardBack = gameObject.GetComponent<Image>();
 
         // (1) placeholder card image
         if (data.type == CardType.Noun)
         {
-            cardImage.sprite = Resources.Load<Sprite>("Origs/WordCardNounExampleOrig300DPI");
+            Sprite load = Resources.Load<Sprite>("CardBlanks/Noun_Card_Blank_HiRes");
+            cardBack.sprite = nounBlank;
         }
         else if (data.type == CardType.Adjective)
         {
-            cardImage.sprite = Resources.Load<Sprite>("Origs/WordCardAdjectiveExampleOrig300DPI");
+            cardBack.sprite = verbBlank;
         }
         else if (data.type == CardType.Verb)
         {
-            cardImage.sprite = Resources.Load<Sprite>("Origs/WordCardVerbExampleOrig300DPI");
+            cardBack.sprite = Resources.Load<Sprite>("CardBlanks/Verb_Card_Blank_HiRes");
         }
         else if (data.type == CardType.Goal)
         {
-            cardImage.sprite = Resources.Load<Sprite>("Origs/GoalCardExampleOrig300DPI");
+            cardBack.sprite = Resources.Load<Sprite>("CardBlanks/Goal_Card_Blank_HiRes");
         }
 
         // (1) replace with
-        // cardImage.sprite = Resources.Load<Sprite>(graphicPath);
+        // cardBack.sprite = Resources.Load<Sprite>(graphicPath);
 
         Text cardTitle = GetComponentInChildren<Text>();
         cardTitle.text = data.title;
+
+        Image cardImage = gameObject.transform.FindChild("CardGraphic").GetComponent<Image>();
+        string path = string.Format("CardGraphics/{0}{1}", data.getTypeString(data.type), data.title);
+        cardImage.sprite = Resources.Load<Sprite>(path);
         
         mGame = game;
         mDropZone = dropZone;
