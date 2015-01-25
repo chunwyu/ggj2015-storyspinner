@@ -12,7 +12,7 @@ Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storysp
 Loading C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.065 seconds
+- Completed reload, in  0.070 seconds
 desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -27,110 +27,6 @@ Incoming host list query response from master server.
 (Filename:  Line: 2484)
 
 Host List Recieved
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Initialize engine version: 4.6.1f1 (d1db7a1b5196)
-GfxDevice: creating device client; threaded=1
-Direct3D:
-    Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA GeForce GTX 760 (ID=0x1187)
-    Vendor:   NVIDIA
-    VRAM:     1986 MB
-Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.040 seconds
-desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
-<RI> Initializing input.
-<RI> Input initialized.
-Call to StartServer
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Running as server. Player ID is 0.
- 
-(Filename:  Line: 2484)
-
-Server Initialized.
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Attempting to connect to master server at 24.19.57.246:23466
- 
-(Filename:  Line: 2484)
-
-Connected player: b
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Sent RPC call 'RecievePlayers' to all connected clients
-
- 
-(Filename:  Line: 2484)
-
-Sent RPC call 'AddPlayer' to all connected clients
-
- 
-(Filename:  Line: 2484)
-
-Connected to master server at 24.19.57.246:23466
- 
-(Filename:  Line: 2484)
-
-Sent host registration to master server, registering a NAT assisted game as
- "a", 1, 9, not password protected, ""
- 
-(Filename:  Line: 2494)
-
-Internal error while connecting to master server. Too many connected peers.
- 
-(Filename:  Line: 129)
-
-Received identifier 0 from master server
- 
-(Filename:  Line: 2484)
-
-Connected to master server at 24.19.57.246:23466
- 
-(Filename:  Line: 2484)
-
-Incoming host list query response from master server.
- 
-(Filename:  Line: 2484)
-
-Host List Recieved
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Host: a
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Connected to facilitator at 67.225.180.24:50005
-
- 
-(Filename:  Line: 2484)
-
-Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\System.dll (this message is harmless)
-Connected to master server at 24.19.57.246:23466
- 
-(Filename:  Line: 2484)
-
-Incoming host list query response from master server.
- 
-(Filename:  Line: 2484)
-
-Host List Recieved
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Host: a
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
@@ -154,10 +50,6 @@ Connecting to server a
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-New connection established (10.0.0.3:53655)
- 
-(Filename:  Line: 2484)
-
 Connected to 10.0.0.3:25000
 
  
@@ -166,45 +58,6 @@ Connected to 10.0.0.3:25000
 Connected to master server at 24.19.57.246:23466
  
 (Filename:  Line: 2484)
-
-Network protocol version 0 connected
- 
-(Filename:  Line: 2494)
-
-New scope index 0 is now in scope for SceneID: 3 Level Prefix: 0
- 
-(Filename:  Line: 2484)
-
-New scope index 0 is now in scope for SceneID: 1 Level Prefix: 0
- 
-(Filename:  Line: 2484)
-
-New scope index 0 is now in scope for SceneID: 2 Level Prefix: 0
- 
-(Filename:  Line: 2484)
-
-Allocated 2 batches of size 50 for player 1
- 
-(Filename:  Line: 2494)
-
-Sent initalization to player 1
- 
-(Filename:  Line: 2484)
-
-Sending generic initial state update, broadcast on, view ID 'SceneID: 3 Level Prefix: 0'
-
- 
-(Filename:  Line: 2494)
-
-Sending generic initial state update, broadcast on, view ID 'SceneID: 1 Level Prefix: 0'
-
- 
-(Filename:  Line: 2494)
-
-Sending generic initial state update, broadcast on, view ID 'SceneID: 2 Level Prefix: 0'
-
- 
-(Filename:  Line: 2494)
 
 Server Joined!
  
@@ -234,6 +87,14 @@ Received state update for view ID SceneID: 2 Level Prefix: 0
  
 (Filename:  Line: 2494)
 
+Received RPC 'RecievePlayers'- mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Relay RPC - name: RecievePlayers - mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
 Incoming host list query response from master server.
  
 (Filename:  Line: 2484)
@@ -246,44 +107,6 @@ Host: a
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Received RPC 'AddPlayer'- mode 0 - sender 10.0.0.3:53655
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: AddPlayer - mode 0 - sender 10.0.0.3:53655
- 
-(Filename:  Line: 2494)
-
-Connected player: c
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Sent RPC call 'RecievePlayers' to all connected clients
-
- 
-(Filename:  Line: 2484)
-
-Received RPC 'RecievePlayers'- mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RecievePlayers - mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RPCReadyStatus'- mode 2 - sender 10.0.0.3:53655
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RPCReadyStatus - mode 2 - sender 10.0.0.3:53655
- 
-(Filename:  Line: 2494)
-
-Sent RPC call 'RPCReadyStatus' to all connected clients
-
- 
-(Filename:  Line: 2484)
-
 Received RPC 'RPCReadyStatus'- mode 2 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
@@ -292,11 +115,6 @@ Relay RPC - name: RPCReadyStatus - mode 2 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
 
-Sent RPC call 'RPCReadyStatus' to all connected clients
-
- 
-(Filename:  Line: 2484)
-
 Received RPC 'RPCReadyStatus'- mode 2 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
@@ -304,19 +122,6 @@ Received RPC 'RPCReadyStatus'- mode 2 - sender 10.0.0.3:25000
 Relay RPC - name: RPCReadyStatus - mode 2 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
-
-Received RPC 'RPCReadyStatus'- mode 2 - sender 10.0.0.3:53655
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RPCReadyStatus - mode 2 - sender 10.0.0.3:53655
- 
-(Filename:  Line: 2494)
-
-Sent RPC call 'RPCStartGame' to all connected clients
-
- 
-(Filename:  Line: 2484)
 
 Received RPC 'RPCStartGame'- mode 2 - sender 10.0.0.3:25000
  
@@ -326,98 +131,6 @@ Relay RPC - name: RPCStartGame - mode 2 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
 
-Can't send RPC function because the target is not connected to the server.
- 
-(Filename:  Line: 2463)
-
-Can't send RPC function because the target is not connected to the server.
- 
-(Filename:  Line: 2463)
-
-Can't send RPC function because the target is not connected to the server.
- 
-(Filename:  Line: 2463)
-
-Can't send RPC function because the target is not connected to the server.
- 
-(Filename:  Line: 2463)
-
-Can't send RPC function because the target is not connected to the server.
- 
-(Filename:  Line: 2463)
-
-Can't send RPC function because the target is not connected to the server.
- 
-(Filename:  Line: 2463)
-
-Can't send RPC function because the target is not connected to the server.
- 
-(Filename:  Line: 2463)
-
-Hand for player: b
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Card Noun Test card 39 
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Card Noun Test card 38 
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Card Noun Test card 37 
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Card Noun Test card 36 
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Card Noun Test card 35 
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Card Noun Test card 34 
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Card Noun Test card 33 
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Hand for player: c
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Card Noun Test card 32 
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Card Noun Test card 31 
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Card Noun Test card 30 
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Card Noun Test card 29 
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Card Noun Test card 28 
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Card Noun Test card 27 
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Card Noun Test card 26 
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
 Received RPC 'RecieveCard'- mode 3 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
@@ -425,10 +138,6 @@ Received RPC 'RecieveCard'- mode 3 - sender 10.0.0.3:25000
 Relay RPC - name: RecieveCard - mode 3 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
-
-Can't send RPC function because the target is not connected to the server.
- 
-(Filename:  Line: 2463)
 
 Received RPC 'RecieveCard'- mode 3 - sender 10.0.0.3:25000
  
@@ -483,6 +192,118 @@ Received RPC 'RecieveGoal'- mode 3 - sender 10.0.0.3:25000
 (Filename:  Line: 2494)
 
 Relay RPC - name: RecieveGoal - mode 3 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Received RPC 'RecieveTurn'- mode 3 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Relay RPC - name: RecieveTurn - mode 3 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Selected Card: Test card 31
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Received RPC 'RecieveTurn'- mode 3 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Relay RPC - name: RecieveTurn - mode 3 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Selected Card: Test card 31
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Received RPC 'RecieveTurn'- mode 3 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Relay RPC - name: RecieveTurn - mode 3 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Selected Card: Test card 30
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Received RPC 'RecieveTurn'- mode 3 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Relay RPC - name: RecieveTurn - mode 3 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Selected Card: Test card 30
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
 

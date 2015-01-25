@@ -36,6 +36,7 @@ public class Game : MonoBehaviour {
     
     private Player mLocalPlayer;
     private bool mbIsMyTurn;
+    private bool mbNextTurnReady;
     
     public RectTransform mDropZone;
     public Text mPlayedText;
@@ -51,6 +52,7 @@ public class Game : MonoBehaviour {
 
         gameState = GameState.MainMenu;
         mLocalPlayer = new Player ();
+        mbNextTurnReady = true;
 	}
 
     public void AddPlayer(string name, NetworkPlayer player)
@@ -144,13 +146,22 @@ public class Game : MonoBehaviour {
     {
     	if (Network.isServer)
     	{
-	        if (currentPlayer == null)
+	        if (mbNextTurnReady)
 	        {
 	            currentPlayer = turnQueue.Dequeue();
 	            //TURN LOGIC GOES HERE
-	            networkView.RPC ("ReceiveTurn", currentPlayer.mPlayer);
+	            if (!mLocalPlayer.mPlayer.Equals (currentPlayer.mPlayer))
+	            {
+					networkView.RPC ("RecieveTurn", currentPlayer.mPlayer);
+	            }
+	            else
+	            {
+	            	mbIsMyTurn = true;
+	            }
 	            
 	            turnQueue.Enqueue(currentPlayer);
+	            
+	            mbNextTurnReady = false;
 	        }
         }
     }
@@ -215,7 +226,31 @@ public class Game : MonoBehaviour {
     	{
     		Card selectedCard = b.gameObject.GetComponent <Card> ();
     		Debug.Log ("Selected Card: " + selectedCard.data.title);
+    		//possibly display a dialog to allow players to add extra connectors between their words
+    		if (!Network.isServer)
+    		{
+    			networkView.RPC ("SendSelection", RPCMode.Server, selectedCard.data.title);
+    		}
+    		else
+    		{
+    			SendSelection (selectedCard.data.title);
+    		}
+    		mbIsMyTurn = false;
     	}
+    }
+    
+    [RPC]
+    public void SendSelection (string selection)
+    {
+    	mPlayedText.text += selection + " ";
+    	networkView.RPC ("DistributeStory", RPCMode.All, mPlayedText.text);
+    	mbNextTurnReady = true;
+    }
+    
+    [RPC]
+    public void DistributeStory (string currentStory)
+    {
+    	mPlayedText.text = currentStory;
     }
 
     // Sorry for duplication, but I figure I'd leave this open for adjustments.
@@ -228,7 +263,7 @@ public class Game : MonoBehaviour {
         newTransform.SetParent(mCardList.transform, false);
 
         cardScript.data = cardData;
-        cardScript.Init();
+        cardScript.Init(this, mDropZone);
     }
 
     void MakeNewCardDisplay(CardData newCard)
@@ -343,8 +378,8 @@ public class Game : MonoBehaviour {
         }
 
         // pop up the winner image
-        GameObject winnerDisplay = (GameObject)Instantiate(winnerDisplayObj);
-
+        //GameObject winnerDisplay = (GameObject)Instantiate(winnerDisplayObj);
+	}
     
     public void CardPlayed (CardData card)
     {
