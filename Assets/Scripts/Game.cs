@@ -206,7 +206,6 @@ public class Game : MonoBehaviour {
 
     void LoadGame()
     {
-
         DataAccess da = new DataAccess();
         List<CardData> cardList = new List<CardData>();
         cardList = da.readCard();
@@ -591,7 +590,7 @@ public class Game : MonoBehaviour {
 			}
 		}
 		
-		if (votedPlayers.Count == players.Count)
+		if (votedPlayers.Count >= players.Count)
 		{
 			networkView.RPC ("RecieveResults", RPCMode.All, mTallyFor, mTallyAgainst);
 		}

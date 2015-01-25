@@ -249,7 +249,7 @@ public class GameLobby : MonoBehaviour
             GameObject textObj = connectedDisplay.transform.FindChild("PlayerName").gameObject;
             Text name = textObj.GetComponent<Text>();
 
-            if (name.Equals(targetName))
+            if ((name.text).Equals(targetName))
             {
                 bg.color = Color.yellow;
             }
