@@ -18,11 +18,15 @@ public enum GameState
 }
 
 public class Game : MonoBehaviour {
+
+	private const string SENTENCE_VOTE = "Should we end this sentence?";
+	private const string GOAL_VOTE = "Was this goal accomplished?";
     private int HandSizeLimit = 7;
     private int ScoringLimit = 10;
 
     private List<Player> players;
     private Queue<Player> turnQueue;
+    private List<Player> votedPlayers;
     public Player currentPlayer;
 
     public GameObject playerObj;
@@ -33,11 +37,14 @@ public class Game : MonoBehaviour {
     public GameObject mCardButtonObj;
     public GameObject mVoteCardObj;
     public GameObject mCardList;
+    public GameObject mEndSentenceButton;
     
     public GameObject mPrefixPanel;
     public InputField mPrefixInput;
     
     public GameObject mVotingPanel;
+    public Text mVotingText;
+    public GameObject mTurnNotificationPanel;
     
     private Player mLocalPlayer;
     private bool mbIsMyTurn;
@@ -52,12 +59,15 @@ public class Game : MonoBehaviour {
     public GameObject mWinnerTextObj;
     public GameObject mCanvas;
     private bool winnerShown;
+    
+    private int mTallyFor, mTallyAgainst;
 
 	// Use this for initialization
 	void Start () {
         deck = new List<CardData>();
         goalDeck = new List<CardData>();
         players = new List<Player>();
+        votedPlayers = new List<Player> ();
         turnQueue = new Queue<Player>();
 
         // Placeholder: starting at DrawCards until net connection code is in
@@ -284,6 +294,10 @@ public class Game : MonoBehaviour {
 				MakeNewCardDisplay (card);
 			}
     	}
+    	
+    	mTurnNotificationPanel.SetActive (mbIsMyTurn);
+    	mEndSentenceButton.SetActive (mbIsMyTurn);
+
     }
     
     
@@ -483,4 +497,92 @@ public class Game : MonoBehaviour {
     {
     	mPlayedText.text += card.title;
     }
+    
+	public void StartEndSentenceVote ()
+	{
+		if (mbIsMyTurn)
+		{
+			//TODO: check some things here?
+			if (!Network.isServer)
+			{
+				networkView.RPC ("RequestSentenceVote", RPCMode.Server);
+			}
+			else
+			{
+				RequestSentenceVote ();
+			}
+		}
+	}
+	
+	[RPC]
+	public void RequestSentenceVote ()
+	{
+		networkView.RPC ("StartSentenceVote", RPCMode.All);
+		votedPlayers.Clear ();
+	}
+	
+	[RPC]
+	public void StartSentenceVote ()
+	{
+		mVotingPanel.SetActive (true);
+		mVotingText.text = SENTENCE_VOTE;
+		mTallyFor = mTallyAgainst = 0;
+	}
+	
+	public void SubmitVote (bool vote)
+	{
+		if (Network.isClient)
+		{
+			networkView.RPC ("RecieveVote", RPCMode.Server, vote);
+		}
+		else
+		{
+			votedPlayers.Add (mLocalPlayer);
+			if (vote)
+			{
+				mTallyFor++;
+			}
+			else
+			{
+				mTallyAgainst++;
+			}
+		}
+	}
+	
+	[RPC]
+	public void RecieveVote(bool vote, NetworkMessageInfo info)
+	{
+		Player sendingPlayer = null;		
+		foreach (Player p in players)
+		{
+			if (p.mPlayer.Equals (info.sender))
+			{
+				sendingPlayer = p;
+			}
+		}
+		
+		if (!votedPlayers.Contains (sendingPlayer) && sendingPlayer != null)
+		{
+			votedPlayers.Add (sendingPlayer);
+			if (vote)
+			{
+				mTallyFor++;
+			}
+			else
+			{
+				mTallyAgainst++;
+			}
+		}
+		
+		if (votedPlayers.Count == players.Count)
+		{
+			networkView.RPC ("RecieveResults", RPCMode.All, mTallyFor, mTallyAgainst);
+		}
+	}
+	
+	[RPC]
+	public void RecieveResults (int tallyFor, int tallyAgainst)
+	{
+		mVotingText.text = "Results are: " + tallyFor + " For, and " + tallyAgainst + " against.";
+	}
 }
