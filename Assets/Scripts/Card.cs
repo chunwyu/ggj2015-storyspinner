@@ -91,8 +91,8 @@ public class Card : MonoBehaviour {
         cardTitle.text = data.title;
 
         Image cardImage = gameObject.transform.FindChild("CardGraphic").GetComponent<Image>();
-        string path = string.Format("CardGraphics/{0}{1}", data.getTypeString(data.type), data.title);
-        cardImage.sprite = Resources.Load<Sprite>(path);
+        //string path = string.Format("CardGraphics/{0}_{1}", data.getTypeString(data.type), data.graphicPath);
+        cardImage.sprite = Resources.Load<Sprite>(data.graphicPath);
         
         mGame = game;
         mDropZone = dropZone;
