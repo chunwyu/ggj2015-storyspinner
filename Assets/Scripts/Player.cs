@@ -63,10 +63,8 @@ public class Player {
     {
         if (isYou)
         {
-            GameObject cardObject = (GameObject)GameObject.Instantiate(Resources.Load("Card"), Vector3.zero, Quaternion.identity);
-            Card cardScript = cardObject.GetComponent<Card>();
-            cardScript.data = c;
-            cardScript.Init();
+            //GameObject cardObject = (GameObject)GameObject.Instantiate(Resources.Load("Card"), Vector3.zero, Quaternion.identity);
+
         }
 
         hand.Add(c);

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -25,6 +25,9 @@ public class Game : MonoBehaviour {
     public GameState gameState;
     public List<CardData> deck;
     public List<CardData> goalDeck;
+
+    public GameObject mCardButtonObj;
+    public GameObject mCardList;
     
     private Player mLocalPlayer;
 
@@ -138,8 +141,26 @@ public class Game : MonoBehaviour {
 	            CardData nextCard = deck[deck.Count - 1];
 	            deck.RemoveAt(deck.Count - 1);
 	            p.AddCard (nextCard);
+
+	            if (!p.Equals (mLocalPlayer))
+	            {
+	            	networkView.RPC ("RecieveCard", p.mPlayer, DataAccess.GetJSONfromCard (nextCard));
+	        	}
+                else
+                {
+                    GameObject newCard = (GameObject)GameObject.Instantiate(mCardButtonObj);
+                    Card cardScript = newCard.GetComponent<Card>();
+
+                    RectTransform newTransform = newCard.GetComponent<RectTransform>();
+                    newTransform.SetParent(mCardList.transform, false);
+
+                    cardScript.data = nextCard;
+                    cardScript.Init();
+                }
+
 				//produces an error when called on the server that is meaningless but that i can't remove
 	            networkView.RPC ("RecieveCard", p.mPlayer, DataAccess.GetJSONfromCard (nextCard));
+
 	        }
         }
     }

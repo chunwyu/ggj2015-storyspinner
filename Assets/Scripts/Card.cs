@@ -75,7 +75,7 @@ public class Card : MonoBehaviour {
         // spriteRenderer.sprite = Resources.Load<Sprite>(graphicPath);
 
         Text cardTitle = GetComponentInChildren<Text>();
-        cardTitle.text = "TestText!";
+        cardTitle.text = data.title;
     }
 	
 	// Update is called once per frame
