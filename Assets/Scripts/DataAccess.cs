@@ -42,6 +42,16 @@ public class DataAccess : MonoBehaviour {
 
         return cardList;
     }
+    
+    public static string GetJSONfromCard (CardData card)
+    {
+    
+    }
+    
+    public static CardData GetCardFromJSON (string data)
+    {
+    
+    }
 
             
 	// Use this for initialization
