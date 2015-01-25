@@ -41,6 +41,7 @@ public class Game : MonoBehaviour {
         // Placeholder: starting at DrawCards until net connection code is in
 
         gameState = GameState.MainMenu;
+        mLocalPlayer = new Player ();
 	}
 
     public void AddPlayer(string name, bool isYou, NetworkPlayer player)

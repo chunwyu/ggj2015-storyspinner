@@ -11,7 +11,13 @@ public class Player {
     public Game game;
     public NetworkPlayer mPlayer;
     int points;
-
+	
+	public Player ()
+	{
+		hand = new List<CardData> ();
+		goals = new List<CardData> ();
+	}
+	
 	public Player (string name, Game theGame, NetworkPlayer player)
 	{
 		playerName = name;
