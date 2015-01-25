@@ -76,6 +76,8 @@ public class Game : MonoBehaviour {
     private int mTallyFor, mTallyAgainst;
     private CardData mCurrentVotingGoal;
 
+    private AudioSource SFXsource;
+
 	// Use this for initialization
 	void Start () {
         deck = new List<CardData>();
@@ -91,7 +93,14 @@ public class Game : MonoBehaviour {
         mLocalPlayer = new Player ();
         winnerShown = false;
         mbNextTurnReady = true;
+
+        SFXsource = (AudioSource)gameObject.AddComponent("SFXSource");
 	}
+
+    public void PlaySFX(string resourceName)
+    {
+        SFXsource.PlayOneShot((AudioClip)Resources.Load("SFX/" + resourceName));
+    }
 
     public void AddPlayer(string name, NetworkPlayer player)
     {
@@ -419,6 +428,7 @@ public class Game : MonoBehaviour {
         Button cardButton = newCardObj.GetComponent <Button> ();
         cardButton.onClick.RemoveAllListeners ();
         cardButton.onClick.AddListener ( () => ClickEventMethod(cardButton));
+        cardButton.onClick.AddListener(() => PlaySFX("card_swipe"));
     }
     
     void MakeNewGoalCardDisplay (CardData newCard)
