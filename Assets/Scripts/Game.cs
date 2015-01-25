@@ -34,9 +34,14 @@ public class Game : MonoBehaviour {
     public GameObject mVoteCardObj;
     public GameObject mCardList;
     
+    public GameObject mPrefixPanel;
+    public InputField mPrefixInput;
+    
     private Player mLocalPlayer;
     private bool mbIsMyTurn;
     private bool mbNextTurnReady;
+    private Card mCurrentlySelectedCard;
+    
     
     public RectTransform mDropZone;
     public Text mPlayedText;
@@ -253,18 +258,34 @@ public class Game : MonoBehaviour {
     	if (mbIsMyTurn)
     	{
     		Card selectedCard = b.gameObject.GetComponent <Card> ();
+    		mCurrentlySelectedCard = selectedCard;
     		Debug.Log ("Selected Card: " + selectedCard.data.title);
     		//possibly display a dialog to allow players to add extra connectors between their words
-    		if (!Network.isServer)
-    		{
-    			networkView.RPC ("SendSelection", RPCMode.Server, selectedCard.data.title);
-    		}
-    		else
-    		{
-    			SendSelection (selectedCard.data.title);
-    		}
-    		mbIsMyTurn = false;
+    		
+    		mPrefixPanel.SetActive (true);
+    		
+
     	}
+    }
+    
+    public void SubmitSelection ()
+    {    
+		if (!Network.isServer)
+		{
+			networkView.RPC ("SendSelection", RPCMode.Server, mPrefixInput.text + " " + mCurrentlySelectedCard.data.title);
+		}
+		else
+		{
+			SendSelection (mPrefixInput.text + " " + mCurrentlySelectedCard.data.title);
+		}
+		mbIsMyTurn = false;
+		mPrefixPanel.SetActive (false);
+    }
+    
+    public void CancelSelection ()
+    {
+    	mPrefixPanel.SetActive (false);
+    	mPrefixInput.text = "";
     }
     
     [RPC]
@@ -273,6 +294,7 @@ public class Game : MonoBehaviour {
     	mPlayedText.text += selection + " ";
     	networkView.RPC ("DistributeStory", RPCMode.All, mPlayedText.text);
     	mbNextTurnReady = true;
+    	mPrefixInput.text = "";
     }
     
     [RPC]
