@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class DataAccess : MonoBehaviour {
 
-    public static List<CardData> readCard()
+    public List<CardData> readCard()
     {
         string data = string.Empty;
         List<CardData> cardList = new List<CardData>();
