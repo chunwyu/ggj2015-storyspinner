@@ -50,6 +50,8 @@ public class Game : MonoBehaviour {
     public GameObject mVotingPanel;
     public Text mVotingText;
     public GameObject mTurnNotificationPanel;
+
+    public GameObject mPlayerListing;
     
     private Player mLocalPlayer;
     private bool mbIsMyTurn;
@@ -181,6 +183,9 @@ public class Game : MonoBehaviour {
 	        if (mbNextTurnReady)
 	        {
 	            currentPlayer = turnQueue.Dequeue();
+
+                GameLobby gl = mPlayerListing.GetComponent<GameLobby>();
+                gl.HighlightPlayer(currentPlayer.playerName);
 	            //TURN LOGIC GOES HERE
 	            if (!mLocalPlayer.mPlayer.Equals (currentPlayer.mPlayer))
 	            {
