@@ -48,31 +48,28 @@ public class Card : MonoBehaviour {
         DebugUtils.Assert(data.gameObj == null);
 
         data.gameObj = this.gameObject;
+        Image cardImage = gameObject.GetComponent<Image>();
 
         // (1) placeholder card image
         if (data.type == CardType.Noun)
         {
-            SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = Resources.Load<Sprite>("Origs/WordCardNounExampleOrig300DPI");
+            cardImage.sprite = Resources.Load<Sprite>("Origs/WordCardNounExampleOrig300DPI");
         }
         else if (data.type == CardType.Adjective)
         {
-            SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = Resources.Load<Sprite>("Origs/WordCardAdjectiveExampleOrig300DPI");
+            cardImage.sprite = Resources.Load<Sprite>("Origs/WordCardAdjectiveExampleOrig300DPI");
         }
         else if (data.type == CardType.Verb)
         {
-            SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = Resources.Load<Sprite>("Origs/WordCardVerbExampleOrig300DPI");
+            cardImage.sprite = Resources.Load<Sprite>("Origs/WordCardVerbExampleOrig300DPI");
         }
         else if (data.type == CardType.Goal)
         {
-            SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = Resources.Load<Sprite>("Origs/GoalCardExampleOrig300DPI");
+            cardImage.sprite = Resources.Load<Sprite>("Origs/GoalCardExampleOrig300DPI");
         }
 
         // (1) replace with
-        // spriteRenderer.sprite = Resources.Load<Sprite>(graphicPath);
+        // cardImage.sprite = Resources.Load<Sprite>(graphicPath);
 
         Text cardTitle = GetComponentInChildren<Text>();
         cardTitle.text = data.title;

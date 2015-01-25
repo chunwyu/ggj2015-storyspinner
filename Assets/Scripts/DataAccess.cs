@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class DataAccess : MonoBehaviour {
-    
+
     public static List<CardData> readCard()
     {
         string data = string.Empty;
@@ -45,13 +45,29 @@ public class DataAccess : MonoBehaviour {
     
     public static string GetJSONfromCard (CardData card)
     {
-    	return null;
-        return string.Format(" {\"CardArray\": [{\"title\": \"?title{0}\",\"description\": \"?description{1}\",\"type\": type{2},\"graphicPath\": \"graphicPath{3}\"}", card.title, card.description, card.type, card.graphicPath);
+        JSONObject newCard = new JSONObject();
+
+        CardType x = CardType.Noun;
+
+        switch ((int)card.type)
+        {
+            case 0: x = CardType.Noun; break;
+            case 1: x = CardType.Verb; break;
+            case 2: x = CardType.Adjective; break;
+            case 3: x = CardType.Goal; break;
+        }
+
+        newCard.AddField("title", card.title);
+        newCard.AddField("description", card.description);
+        newCard.AddField("graphicPath", card.graphicPath);
+        newCard.AddField("type", (int)x);
+
+        return (newCard.ToString());
+
     }
     
     public static CardData GetCardFromJSON (string data)
     {
-    	return null;
         JSONObject card = new JSONObject(data);
         CardData newCard = new CardData();
 
