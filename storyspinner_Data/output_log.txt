@@ -2,22 +2,22 @@ Initialize engine version: 4.6.1f1 (d1db7a1b5196)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA GeForce GTX 760 (ID=0x1187)
-    Vendor:   NVIDIA
-    VRAM:     1986 MB
+    Renderer: Intel(R) HD Graphics Family (ID=0xa16)
+    Vendor:   Intel
+    VRAM:     896 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.070 seconds
-desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
+Platform assembly: C:\_DATA\projects\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\_DATA\projects\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\_DATA\projects\ggj2015-storyspinner\storyspinner_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\_DATA\projects\ggj2015-storyspinner\storyspinner_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\_DATA\projects\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\_DATA\projects\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.122 seconds
+desktop: 2160x1440 59Hz; virtual: 2160x1440 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\_DATA\projects\ggj2015-storyspinner\storyspinner_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\_DATA\projects\ggj2015-storyspinner\storyspinner_Data\Managed\System.dll (this message is harmless)
 Connected to master server at 24.19.57.246:23466
  
 (Filename:  Line: 2484)
@@ -27,6 +27,14 @@ Incoming host list query response from master server.
 (Filename:  Line: 2484)
 
 Host List Recieved
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Host: a
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Host: sup
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
@@ -42,7 +50,12 @@ Host: a
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Running as client. No player ID set yet.
+Host: sup
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Sent connect request to facilitator at 67.225.180.24:50005
+
  
 (Filename:  Line: 2484)
 
@@ -50,12 +63,43 @@ Connecting to server a
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Connected to 10.0.0.3:25000
+Connected to master server at 24.19.57.246:23466
+ 
+(Filename:  Line: 2484)
+
+Connected to facilitator at 67.225.180.24:50005
 
  
 (Filename:  Line: 2484)
 
-Connected to master server at 24.19.57.246:23466
+Doing NAT punch through to 1125902072203089470 using 67.225.180.24:50005
+
+ 
+(Filename:  Line: 2484)
+
+Incoming host list query response from master server.
+ 
+(Filename:  Line: 2484)
+
+Host List Recieved
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Host: a
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Host: sup
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Successfully performed NAT punchthrough to 24.19.57.246:25000
+
+ 
+(Filename:  Line: 2484)
+
+Connected to 24.19.57.246:25000
+
  
 (Filename:  Line: 2484)
 
@@ -87,227 +131,19 @@ Received state update for view ID SceneID: 2 Level Prefix: 0
  
 (Filename:  Line: 2494)
 
-Received RPC 'RecievePlayers'- mode 2 - sender 10.0.0.3:25000
+Received RPC 'RecievePlayers'- mode 2 - sender 24.19.57.246:25000
  
 (Filename:  Line: 2494)
 
-Relay RPC - name: RecievePlayers - mode 2 - sender 10.0.0.3:25000
+Relay RPC - name: RecievePlayers - mode 2 - sender 24.19.57.246:25000
  
 (Filename:  Line: 2494)
 
-Incoming host list query response from master server.
- 
-(Filename:  Line: 2484)
-
-Host List Recieved
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Host: a
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Received RPC 'RPCReadyStatus'- mode 2 - sender 10.0.0.3:25000
+Received RPC 'RPCReadyStatus'- mode 2 - sender 24.19.57.246:25000
  
 (Filename:  Line: 2494)
 
-Relay RPC - name: RPCReadyStatus - mode 2 - sender 10.0.0.3:25000
+Relay RPC - name: RPCReadyStatus - mode 2 - sender 24.19.57.246:25000
  
 (Filename:  Line: 2494)
-
-Received RPC 'RPCReadyStatus'- mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RPCReadyStatus - mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RPCStartGame'- mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RPCStartGame - mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RecieveCard'- mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RecieveCard - mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RecieveCard'- mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RecieveCard - mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RecieveCard'- mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RecieveCard - mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RecieveCard'- mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RecieveCard - mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RecieveCard'- mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RecieveCard - mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RecieveCard'- mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RecieveCard - mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RecieveCard'- mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RecieveCard - mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RecieveGoal'- mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RecieveGoal - mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RecieveTurn'- mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RecieveTurn - mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Selected Card: Test card 31
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RecieveTurn'- mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RecieveTurn - mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Selected Card: Test card 31
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RecieveTurn'- mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RecieveTurn - mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Selected Card: Test card 30
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RecieveTurn'- mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RecieveTurn - mode 3 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Selected Card: Test card 30
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Received RPC 'DistributeStory'- mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: DistributeStory - mode 2 - sender 10.0.0.3:25000
- 
-(Filename:  Line: 2494)
-
-The server has disconnected from the client. Most likely the server has shut down.
- 
-(Filename:  Line: 745)
 

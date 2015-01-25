@@ -3,8 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerDisplay : MonoBehaviour 
-{	
-	public Text mDisplayText;
+{
+    public Text mDisplayText;
+    public Text mScoreText;
 	public Toggle mReadyToggle;
 	public GameLobby mLobby;
 	
@@ -29,6 +30,16 @@ public class PlayerDisplay : MonoBehaviour
 	{
 		mDisplayText.text = name;
 	}
+
+    public void SetScore (string score)
+    {
+        mScoreText.text = score;
+    }
+
+    public void SetScore (int score)
+    {
+        SetScore(score.ToString());
+    }
 	
 	public string GetName ()
 	{
