@@ -2,26 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Player : MonoBehaviour {
+public class Player {
 
     public List<CardData> hand;
     public List<CardData> goals;
     public bool isYou;
     public string playerName;
     public Game game;
+    public NetworkPlayer mPlayer;
     int points;
 
-	// Use this for initialization
-	void Start () {
-        hand = new List<CardData>();
-        goals = new List<CardData>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    for (int i = 0; i < hand.Count; i++)
-        {
-        }
+	public Player (string name, Game theGame, NetworkPlayer player)
+	{
+		playerName = name;
+		game = theGame;
+		mPlayer = player;
+		
+		hand = new List<CardData> ();
+		goals = new List<CardData> ();
 	}
 
     void OnGUI()

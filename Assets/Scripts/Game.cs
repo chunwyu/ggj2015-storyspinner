@@ -34,15 +34,14 @@ public class Game : MonoBehaviour {
         turnQueue = new Queue<Player>();
 
         // Placeholder: starting at DrawCards until net connection code is in
-        AddPlayer("testPlayer", true);
 
-        gameState = GameState.Loading;
+        gameState = GameState.MainMenu;
 	}
 
-    void AddPlayer(string name, bool isYou)
+    public void AddPlayer(string name, bool isYou, NetworkPlayer player)
     {
-        Player newPlayer = gameObject.AddComponent<Player>();
-        newPlayer.name = name;
+        Player newPlayer = new Player (name, this, player);
+        newPlayer.playerName = name;
         newPlayer.isYou = isYou;
         players.Add(newPlayer);
     }
@@ -108,11 +107,11 @@ public class Game : MonoBehaviour {
             goalDeck.Add(c);
         }
     }
-
+	
+	
     void DealCard(Player p)
     {
         // This is host-side code; p.AddCard should be an RPC call here
-
         if (deck.Count > 0)
         {
             CardData nextCard = deck[deck.Count - 1];
@@ -134,12 +133,15 @@ public class Game : MonoBehaviour {
 
     void DrawCards()
     {
-        foreach (Player p in players)
-        {
-            for (int i = p.hand.Count; i < HandSizeLimit; i++)
-            {
-                DealCard(p);
-            }
+    	if (Network.isServer)
+    	{
+	        foreach (Player p in players)
+	        {
+	            for (int i = p.hand.Count; i < HandSizeLimit; i++)
+	            {
+	                DealCard(p);
+	            }
+	        }
         }
     }
 

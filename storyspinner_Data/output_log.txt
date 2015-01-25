@@ -12,7 +12,7 @@ Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storysp
 Loading C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.069 seconds
+- Completed reload, in  0.067 seconds
 desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -30,32 +30,27 @@ Host List Recieved
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Call to StartServer
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Running as server. Player ID is 0.
+Incoming host list query response from master server.
  
 (Filename:  Line: 2484)
 
-Server Initialized.
+Host List Recieved
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Attempting to connect to master server at 24.19.57.246:23466
- 
-(Filename:  Line: 2484)
-
-Connected player: thomas
+Host: a
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Sent RPC call 'RecievePlayers' to all connected clients
-
+Running as client. No player ID set yet.
  
 (Filename:  Line: 2484)
 
-Sent RPC call 'AddPlayer' to all connected clients
+Connecting to server a
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Connected to 10.0.0.3:25000
 
  
 (Filename:  Line: 2484)
@@ -64,18 +59,41 @@ Connected to master server at 24.19.57.246:23466
  
 (Filename:  Line: 2484)
 
-Sent host registration to master server, registering a NAT assisted game as
- "room1", 1, 9, not password protected, ""
+Server Joined!
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Set player ID to 1
+
+ 
+(Filename:  Line: 2484)
+
+Received state update for view ID SceneID: 3 Level Prefix: 0
+
  
 (Filename:  Line: 2494)
 
-Connected to master server at 24.19.57.246:23466
+Receiving state for an object whose network view exists but the observed object no longer exists
  
-(Filename:  Line: 2484)
+(Filename:  Line: 315)
 
-Received identifier 0 from master server
+Received state update for view ID SceneID: 1 Level Prefix: 0
+
  
-(Filename:  Line: 2484)
+(Filename:  Line: 2494)
+
+Received state update for view ID SceneID: 2 Level Prefix: 0
+
+ 
+(Filename:  Line: 2494)
+
+Received RPC 'RecievePlayers'- mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
+
+Relay RPC - name: RecievePlayers - mode 2 - sender 10.0.0.3:25000
+ 
+(Filename:  Line: 2494)
 
 Incoming host list query response from master server.
  
@@ -85,97 +103,31 @@ Host List Recieved
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Host: room1
+Host: a
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Connected to facilitator at 67.225.180.24:50005
-
- 
-(Filename:  Line: 2484)
-
-New connection established (10.0.0.3:53527)
- 
-(Filename:  Line: 2484)
-
-Network protocol version 0 connected
+Received RPC 'RPCReadyStatus'- mode 2 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
 
-New scope index 0 is now in scope for SceneID: 1 Level Prefix: 0
- 
-(Filename:  Line: 2484)
-
-New scope index 0 is now in scope for SceneID: 2 Level Prefix: 0
- 
-(Filename:  Line: 2484)
-
-Allocated 2 batches of size 50 for player 1
+Relay RPC - name: RPCReadyStatus - mode 2 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
 
-Sent initalization to player 1
- 
-(Filename:  Line: 2484)
-
-Sending generic initial state update, broadcast on, view ID 'SceneID: 1 Level Prefix: 0'
-
+Received RPC 'RPCReadyStatus'- mode 2 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
 
-Sending generic initial state update, broadcast on, view ID 'SceneID: 2 Level Prefix: 0'
-
+Relay RPC - name: RPCReadyStatus - mode 2 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
 
-Received RPC 'AddPlayer'- mode 0 - sender 10.0.0.3:53527
+Received RPC 'RPCStartGame'- mode 2 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
 
-Relay RPC - name: AddPlayer - mode 0 - sender 10.0.0.3:53527
+Relay RPC - name: RPCStartGame - mode 2 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
-
-Connected player: butts
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Sent RPC call 'RecievePlayers' to all connected clients
-
- 
-(Filename:  Line: 2484)
-
-Sent host update to master server with identifier 0
- 
-(Filename:  Line: 2484)
-
-Received identifier 0 from master server
- 
-(Filename:  Line: 2484)
-
-Sent RPC call 'RPCReadyStatus' to all connected clients
-
- 
-(Filename:  Line: 2484)
-
-Received RPC 'RPCReadyStatus'- mode 2 - sender 10.0.0.3:53527
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RPCReadyStatus - mode 2 - sender 10.0.0.3:53527
- 
-(Filename:  Line: 2494)
-
-Received RPC 'RPCReadyStatus'- mode 2 - sender 10.0.0.3:53527
- 
-(Filename:  Line: 2494)
-
-Relay RPC - name: RPCReadyStatus - mode 2 - sender 10.0.0.3:53527
- 
-(Filename:  Line: 2494)
-
-Sent RPC call 'RPCReadyStatus' to all connected clients
-
- 
-(Filename:  Line: 2484)
 

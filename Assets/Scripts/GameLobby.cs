@@ -1,29 +1,38 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class GameLobby : MonoBehaviour
 {
 	public InputField mPlayerNameJoin;
 	public InputField mPlayerNameHost;
-	public Player mLocalPlayer;
 	public GameObject mPlayerList;
 	public GameObject mPlayerDisplayPrefab;
 	public NetworkingController mNetworkController;
 	public Animator mPlayerListAnimation;
 	public Button mStartButton;
+	public Game mGame;
 		
 	private string[] mPlayers;
+	private string mLocalPlayerName;
 	private int mPlayersConnected = 0;
+	private List <Player> mPlayerArray;
 	
 	void Start ()
 	{
 		mNetworkController.RefreshHostList ();
 		if (Network.isServer)
 		{
-			mLocalPlayer.playerName = mPlayerNameHost.text;
 			mPlayers = new string[Network.maxConnections];
-			networkView.RPC("AddPlayer", RPCMode.All, mLocalPlayer.playerName);
-			mStartButton.gameObject.SetActive (true);
+			mLocalPlayerName = mPlayerNameHost.text;
+			networkView.RPC("AddPlayer", RPCMode.All, mPlayerNameHost.text);
+			mStartButton.interactable = true;
+		}
+		else
+		{
+			mStartButton.gameObject.SetActive (false);
+			mStartButton.interactable = false;
 		}
 	}
 	
@@ -34,19 +43,19 @@ public class GameLobby : MonoBehaviour
 		
 		if (Network.isClient)
 		{
-			mLocalPlayer.playerName = mPlayerNameJoin.text;
+			mLocalPlayerName = mPlayerNameJoin.text;
 		}
 		else if (Network.isServer)
 		{
-			mLocalPlayer.playerName = mPlayerNameHost.text;
+			mLocalPlayerName = mPlayerNameHost.text;
 		}
-		
-		networkView.RPC("AddPlayer", RPCMode.Server, mLocalPlayer.playerName);
+		networkView.RPC("AddPlayer", RPCMode.Server, mLocalPlayerName);
+
 	}
 	
 	//Only called with RPCMode.Server
 	[RPC]
-	void AddPlayer (string playerName)
+	void AddPlayer (string playerName, NetworkMessageInfo info)
 	{
 		mPlayers[mPlayersConnected++] = playerName;
 		
@@ -60,6 +69,7 @@ public class GameLobby : MonoBehaviour
 		}
 		
 		networkView.RPC ("RecievePlayers", RPCMode.All, allPlayers);
+		mGame.AddPlayer(playerName, false, info.sender);
 	}
 	
 	//Only called with RPCMode.Server
@@ -123,7 +133,7 @@ public class GameLobby : MonoBehaviour
 				//newTransform.localScale = new Vector3 (1,1,1);
 				newTransform.SetParent (mPlayerList.transform, false);
 				
-				if (newDisplay.GetName ().Equals (mLocalPlayer.playerName))
+				if (newDisplay.GetName ().Equals (mLocalPlayerName))
 				{
 					newDisplay.SetInteractableToggle (true);
 				}
@@ -198,10 +208,16 @@ public class GameLobby : MonoBehaviour
 		
 		if (bAllReady)
 		{
-			//CODE TO START GAME
-			ActivateMenu ();
-			mStartButton.gameObject.SetActive (false);
+			networkView.RPC ("RPCStartGame", RPCMode.All);
 		}
+	}
+	
+	[RPC]
+	public void RPCStartGame ()
+	{
+		//CODE TO START GAME
+		ActivateMenu ();
+		//mStartButton.gameObject.SetActive (false);
 	}
 	
 	public void ActivateMenu ()
