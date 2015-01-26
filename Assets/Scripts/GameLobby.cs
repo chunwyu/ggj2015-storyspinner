@@ -210,6 +210,7 @@ public class GameLobby : MonoBehaviour
 		if (bAllReady)
 		{
 			networkView.RPC ("RPCStartGame", RPCMode.All);
+			mNetworkController.UnregisterServer ();
 		}
 	}
 	

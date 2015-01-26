@@ -16,6 +16,7 @@ public class NetworkingController : MonoBehaviour
 	
 	public void RefreshHostList ()
 	{
+		MasterServer.ClearHostList ();
 		MasterServer.RequestHostList (TYPE_NAME);
 	}
 	
@@ -77,6 +78,11 @@ public class NetworkingController : MonoBehaviour
 		Debug.Log ("Call to StartServer");
 		Network.InitializeServer (MAX_CONNECTIONS, LISTEN_PORT, !Network.HavePublicAddress ());
 		MasterServer.RegisterHost (TYPE_NAME, mRoomName.text);
+	}
+	
+	public void UnregisterServer ()
+	{
+		MasterServer.UnregisterHost ();
 	}
 	
 	void OnServerInitialized ()
