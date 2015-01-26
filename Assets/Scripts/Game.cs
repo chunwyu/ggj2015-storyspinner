@@ -514,6 +514,7 @@ public class Game : MonoBehaviour {
 		}
 	}
 	
+	//Only run on server
 	[RPC]
 	public void RequestSentenceVote ()
 	{
@@ -521,6 +522,7 @@ public class Game : MonoBehaviour {
 		votedPlayers.Clear ();
 	}
 	
+	//Run Everywhere
 	[RPC]
 	public void StartSentenceVote ()
 	{
@@ -528,6 +530,7 @@ public class Game : MonoBehaviour {
 		mVotingText.text = SENTENCE_VOTE;
 		mTallyFor = mTallyAgainst = 0;
 	}
+	
 	
 	public void SubmitVote (bool vote)
 	{
@@ -549,6 +552,7 @@ public class Game : MonoBehaviour {
 		}
 	}
 	
+	//Only Run on Server
 	[RPC]
 	public void RecieveVote(bool vote, NetworkMessageInfo info)
 	{
@@ -576,27 +580,14 @@ public class Game : MonoBehaviour {
 		
 		if (votedPlayers.Count == players.Count)
 		{
-			if (mTallyFor >= mTallyAgainst)
-			{
-				networkView.RPC ("RecieveResults", RPCMode.All, true);
-			}
-			else
-			{
-				networkView.RPC ("RecieveResults", RPCMode.All, false);
-			}
+			networkView.RPC ("RecieveResults", RPCMode.All, mTallyFor, mTallyAgainst);
 		}
 	}
 	
+	//Run Everywhere
 	[RPC]
-	public void RecieveResults (bool success)
+	public void RecieveResults (int tallyFor, int tallyAgainst)
 	{
-		if (success)
-		{
-			mVotingText.text = "The ayes have it";
-		}
-		else
-		{
-			mVotingText.text = "They nays have it";
-		}
+		mVotingText.text = "Results are: " + tallyFor + " For, and " + tallyAgainst + " against.";
 	}
 }
