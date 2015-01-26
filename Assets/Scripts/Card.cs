@@ -76,7 +76,7 @@ public class Card : MonoBehaviour {
         }
         else if (data.type == CardType.Verb)
         {
-            cardBack.sprite = Resources.Load<Sprite>("CardBlanks/Verb_Card_Blank_HiRes");
+            cardBack.sprite = Resources.Load<Sprite>(data.graphicPath);
         }
         else if (data.type == CardType.Goal)
         {
@@ -86,13 +86,21 @@ public class Card : MonoBehaviour {
         // (1) replace with
         // cardBack.sprite = Resources.Load<Sprite>(graphicPath);
 
-        Text cardTitle = GetComponentInChildren<Text>();
-        cardTitle.text = data.title;
-
         Image cardImage = gameObject.transform.FindChild("CardGraphic").GetComponent<Image>();
-        //string path = string.Format("CardGraphics/{0}_{1}", data.getTypeString(data.type), data.graphicPath);
-        cardImage.sprite = Resources.Load<Sprite>(data.graphicPath);
+        Text cardTitle = GetComponentInChildren<Text>();
         
+        // hack, don't have verb standalone graphics
+        if (data.type != CardType.Verb)
+        {
+            //string path = string.Format("CardGraphics/{0}_{1}", data.getTypeString(data.type), data.graphicPath);
+            cardImage.sprite = Resources.Load<Sprite>(data.graphicPath);
+            cardTitle.text = data.title;
+        }
+        else
+        {
+            cardImage.sprite = null;
+            cardTitle.text = "";
+        }
         mGame = game;
         mDropZone = dropZone;
     }
