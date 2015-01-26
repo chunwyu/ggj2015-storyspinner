@@ -50,7 +50,8 @@ public class Game : MonoBehaviour {
     private bool mbIsMyTurn;
     private bool mbNextTurnReady;
     private Card mCurrentlySelectedCard;
-    
+
+    public RectTransform mPlayerList;
     
     public RectTransform mDropZone;
     public Text mPlayedText;
@@ -176,6 +177,11 @@ public class Game : MonoBehaviour {
 	        if (mbNextTurnReady)
 	        {
 	            currentPlayer = turnQueue.Dequeue();
+
+                // Highlight that player on the player list
+                GameLobby gl = mPlayerList.GetComponent<GameLobby>();
+                gl.HighlightPlayer(currentPlayer.playerName);
+
 	            //TURN LOGIC GOES HERE
 	            if (!mLocalPlayer.mPlayer.Equals (currentPlayer.mPlayer))
 	            {
@@ -454,7 +460,6 @@ public class Game : MonoBehaviour {
 
     void ProcessEndGame()
     {
-
         List<Player> ranking = new List<Player>(players);
 
         // sort by score

@@ -222,13 +222,43 @@ public class GameLobby : MonoBehaviour
 		mGame.ChangeState (GameState.Loading);
 		mTextDisplay.SetActive (true);
 		//mStartButton.gameObject.SetActive (false);
+
+        // Activate score output in player list
+        Text[] connectedDisplayTexts = mPlayerList.GetComponentsInChildren<Text>();
+        foreach (Text t in connectedDisplayTexts)
+        {
+            t.gameObject.SetActive(true);
+        }
+
 	}
 	
 	public void ActivateMenu ()
 	{
 		mPlayerListAnimation.SetBool ("IsActive", true);
 	}
-	
+
+	public void HighlightPlayer (string targetName)
+    {
+        GameObject connectedDisplay;
+
+        for (int i = 0; i < mPlayerList.transform.childCount; i++)
+        {
+            connectedDisplay = mPlayerList.transform.GetChild(i).gameObject;
+            Image bg = connectedDisplay.GetComponent<Image>();
+
+            GameObject textObj = connectedDisplay.transform.FindChild("PlayerName").gameObject;
+            Text name = textObj.GetComponent<Text>();
+
+            if (name.Equals(targetName))
+            {
+                bg.color = Color.yellow;
+            }
+            else
+            {
+                bg.color = new Color(0.93f, 0.93f, 0.93f);
+            }
+        }
+    }
 }
 
 
