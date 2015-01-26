@@ -576,13 +576,27 @@ public class Game : MonoBehaviour {
 		
 		if (votedPlayers.Count == players.Count)
 		{
-			networkView.RPC ("RecieveResults", RPCMode.All, mTallyFor, mTallyAgainst);
+			if (mTallyFor >= mTallyAgainst)
+			{
+				networkView.RPC ("RecieveResults", RPCMode.All, true);
+			}
+			else
+			{
+				networkView.RPC ("RecieveResults", RPCMode.All, false);
+			}
 		}
 	}
 	
 	[RPC]
-	public void RecieveResults (int tallyFor, int tallyAgainst)
+	public void RecieveResults (bool success)
 	{
-		mVotingText.text = "Results are: " + tallyFor + " For, and " + tallyAgainst + " against.";
+		if (success)
+		{
+			mVotingText.text = "The ayes have it";
+		}
+		else
+		{
+			mVotingText.text = "They nays have it";
+		}
 	}
 }
