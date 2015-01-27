@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
 
     public List<CardData> hand;
     public bool isYou;
+    public string playerName;
     int points;
 
 	// Use this for initialization
