@@ -37,13 +37,19 @@ public class CardData
 // Script to actually run on Card GameObject
 public class Card : MonoBehaviour {
     public CardData data;
-
+	public Game mGame;
+	
+	public Vector3 mMouseOffset;
+	public RectTransform mParent;
+	
+	public RectTransform mDropZone;
+	
 	// Use this for initialization
 	void Start () {
 
 	}
 
-    public void Init ()
+    public void Init (Game game, RectTransform dropZone)
     {
         DebugUtils.Assert(data.gameObj == null);
 
@@ -73,10 +79,37 @@ public class Card : MonoBehaviour {
 
         Text cardTitle = GetComponentInChildren<Text>();
         cardTitle.text = data.title;
+        
+        mGame = game;
+        mDropZone = dropZone;
     }
 	
 	// Update is called once per frame
 	void Update () {
 	
+	}
+	
+	void OnMouseDown ()
+	{
+		mMouseOffset = transform.position - Input.mousePosition;
+		RectTransform rectTransform = GetComponent <RectTransform> ();
+		mParent = rectTransform.parent.GetComponent <RectTransform> ();
+		rectTransform.SetParent (rectTransform.parent.parent);
+	}
+	
+	void OnMouseDrag ()
+	{
+		transform.position = Input.mousePosition + mMouseOffset;
+	}
+	
+	void OnMouseUp ()
+	{
+		RectTransform rTransform = GetComponent <RectTransform> ();
+		if (rTransform.rect.Overlaps(mDropZone.rect, true))
+		{
+			//CARD LANDED IN CARD ZONE IT IS NOW PLAYED
+			mGame.CardPlayed (data);
+		}
+		rTransform.SetParent (mParent);
 	}
 }

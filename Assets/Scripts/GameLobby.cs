@@ -69,7 +69,7 @@ public class GameLobby : MonoBehaviour
 		}
 		
 		networkView.RPC ("RecievePlayers", RPCMode.All, allPlayers);
-		mGame.AddPlayer(playerName, false, info.sender);
+		mGame.AddPlayer(playerName, info.sender);
 	}
 	
 	//Only called with RPCMode.Server

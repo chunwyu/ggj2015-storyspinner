@@ -6,7 +6,7 @@ public class NetworkingController : MonoBehaviour
 	//constants for game type and name
 	private const string TYPE_NAME = "TaleSpinner";
 	private const string GAME_NAME = "RoomName";
-	private const string SERVER_IP = "localhost";
+	private const string SERVER_IP = "24.19.57.246";
 	private const int LISTEN_PORT = 25000;
 	private const int MAX_CONNECTIONS = 8;
 	
