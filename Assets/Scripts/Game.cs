@@ -30,6 +30,7 @@ public class Game : MonoBehaviour {
     public List<CardData> goalDeck;
 
     public GameObject mCardButtonObj;
+    public GameObject mVoteCardObj;
     public GameObject mCardList;
     
     private Player mLocalPlayer;
@@ -193,6 +194,19 @@ public class Game : MonoBehaviour {
     		Card selectedCard = b.gameObject.GetComponent <Card> ();
     		Debug.Log ("Selected Card: " + selectedCard.data.title);
     	}
+    }
+
+    // Sorry for duplication, but I figure I'd leave this open for adjustments.
+    void MakeVotingCardDisplay(CardData cardData)
+    {
+        GameObject newVoteObj = (GameObject)GameObject.Instantiate(mVoteCardObj);
+        Card cardScript = newVoteObj.GetComponent<Card>();
+
+        RectTransform newTransform = newVoteObj.GetComponent<RectTransform>();
+        newTransform.SetParent(mCardList.transform, false);
+
+        cardScript.data = cardData;
+        cardScript.Init();
     }
 
     void MakeNewCardDisplay(CardData newCard)
