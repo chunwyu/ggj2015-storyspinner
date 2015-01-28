@@ -138,10 +138,8 @@ public class Game : MonoBehaviour {
 	            CardData nextCard = deck[deck.Count - 1];
 	            deck.RemoveAt(deck.Count - 1);
 	            p.AddCard (nextCard);
-	            if (!p.Equals (mLocalPlayer))
-	            {
-	            	networkView.RPC ("RecieveCard", p.mPlayer, DataAccess.GetJSONfromCard (nextCard));
-	        	}
+				//produces an error when called on the server that is meaningless but that i can't remove
+	            networkView.RPC ("RecieveCard", p.mPlayer, DataAccess.GetJSONfromCard (nextCard));
 	        }
         }
     }
@@ -162,6 +160,7 @@ public class Game : MonoBehaviour {
 	            CardData nextGoal = goalDeck[goalDeck.Count - 1];
 	            goalDeck.RemoveAt(goalDeck.Count - 1);
 	            p.AddGoal(nextGoal);
+				//produces an error when called on the server that is meaningless but that i can't remove
 	            networkView.RPC ("RecieveCard", p.mPlayer, DataAccess.GetJSONfromCard (nextGoal));
 	        }
         }
@@ -185,6 +184,15 @@ public class Game : MonoBehaviour {
 	            {
 	                DealCard(p);
 	            }
+	        }
+	        
+	        foreach (Player p in players)
+	        {
+	        	Debug.Log ("Hand for player: " + p.playerName);
+	        	foreach (CardData data in p.hand)
+	        	{
+	        		Debug.Log (data);
+	        	}
 	        }
         }
     }
