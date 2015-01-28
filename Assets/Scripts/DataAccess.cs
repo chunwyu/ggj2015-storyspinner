@@ -45,12 +45,12 @@ public class DataAccess : MonoBehaviour {
     
     public static string GetJSONfromCard (CardData card)
     {
-    
+    	return null;
     }
     
     public static CardData GetCardFromJSON (string data)
     {
-    
+    	return null;
     }
 
             

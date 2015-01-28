@@ -209,6 +209,7 @@ public class GameLobby : MonoBehaviour
 		if (bAllReady)
 		{
 			networkView.RPC ("RPCStartGame", RPCMode.All);
+			mGame.ChangeState (GameState.Loading);
 		}
 	}
 	

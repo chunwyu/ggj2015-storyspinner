@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -25,6 +25,8 @@ public class Game : MonoBehaviour {
     public GameState gameState;
     public List<CardData> deck;
     public List<CardData> goalDeck;
+    
+    private Player mLocalPlayer;
 
 	// Use this for initialization
 	void Start () {
@@ -42,8 +44,23 @@ public class Game : MonoBehaviour {
     {
         Player newPlayer = new Player (name, this, player);
         newPlayer.playerName = name;
-        newPlayer.isYou = isYou;
-        players.Add(newPlayer);
+        
+		if (player.Equals (Network.player))
+		{
+			newPlayer.isYou = true;
+			mLocalPlayer = newPlayer;
+		}
+		else
+		{
+			newPlayer.isYou = false;
+		}
+		
+		players.Add(newPlayer);
+    }
+    
+    public void ChangeState (GameState state)
+    {
+    	gameState = state;
     }
 	
 	// Update is called once per frame
@@ -81,10 +98,13 @@ public class Game : MonoBehaviour {
 
     void ProcessTurn()
     {
-        if (currentPlayer == null)
-        {
-            currentPlayer = turnQueue.Dequeue();
-            turnQueue.Enqueue(currentPlayer);
+    	if (Network.isServer)
+    	{
+	        if (currentPlayer == null)
+	        {
+	            currentPlayer = turnQueue.Dequeue();
+	            turnQueue.Enqueue(currentPlayer);
+	        }
         }
     }
 
@@ -111,24 +131,48 @@ public class Game : MonoBehaviour {
 	
     void DealCard(Player p)
     {
-        // This is host-side code; p.AddCard should be an RPC call here
-        if (deck.Count > 0)
-        {
-            CardData nextCard = deck[deck.Count - 1];
-            deck.RemoveAt(deck.Count - 1);
-            p.AddCard(nextCard);
+    	if (Network.isServer)
+    	{
+	        if (deck.Count > 0)
+	        {
+	            CardData nextCard = deck[deck.Count - 1];
+	            deck.RemoveAt(deck.Count - 1);
+	            p.AddCard (nextCard);
+	            if (!p.Equals (mLocalPlayer))
+	            {
+	            	networkView.RPC ("RecieveCard", p.mPlayer, DataAccess.GetJSONfromCard (nextCard));
+	        	}
+	        }
         }
+    }
+    
+    [RPC]
+    void RecieveCard (string cardData)
+    {
+    	CardData data = DataAccess.GetCardFromJSON (cardData);
+    	mLocalPlayer.AddCard (data);
     }
 
     void DealGoal(Player p)
     {
-        if (goalDeck.Count > 0)
-        {
-            CardData nextGoal = goalDeck[goalDeck.Count - 1];
-            goalDeck.RemoveAt(goalDeck.Count - 1);
-            p.AddGoal(nextGoal);
+    	if (Network.isServer)
+    	{
+	        if (goalDeck.Count > 0)
+	        {
+	            CardData nextGoal = goalDeck[goalDeck.Count - 1];
+	            goalDeck.RemoveAt(goalDeck.Count - 1);
+	            p.AddGoal(nextGoal);
+	            networkView.RPC ("RecieveCard", p.mPlayer, DataAccess.GetJSONfromCard (nextGoal));
+	        }
         }
         // TODO else { reshuffle }
+    }
+    
+    [RPC]
+    void RecieveGoal(string cardData)
+    {
+    	CardData data = DataAccess.GetCardFromJSON (cardData);
+    	mLocalPlayer.AddGoal (data);
     }
 
     void DrawCards()

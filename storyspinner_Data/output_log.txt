@@ -12,7 +12,7 @@ Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storysp
 Loading C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\Users\Thomas\Documents\GitHub\ggj2015-storyspinner\storyspinner_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.067 seconds
+- Completed reload, in  0.066 seconds
 desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -55,10 +55,6 @@ Connected to 10.0.0.3:25000
  
 (Filename:  Line: 2484)
 
-Connected to master server at 24.19.57.246:23466
- 
-(Filename:  Line: 2484)
-
 Server Joined!
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
@@ -86,6 +82,10 @@ Received state update for view ID SceneID: 2 Level Prefix: 0
 
  
 (Filename:  Line: 2494)
+
+Connected to master server at 24.19.57.246:23466
+ 
+(Filename:  Line: 2484)
 
 Received RPC 'RecievePlayers'- mode 2 - sender 10.0.0.3:25000
  
@@ -130,4 +130,8 @@ Received RPC 'RPCStartGame'- mode 2 - sender 10.0.0.3:25000
 Relay RPC - name: RPCStartGame - mode 2 - sender 10.0.0.3:25000
  
 (Filename:  Line: 2494)
+
+The server has disconnected from the client. Most likely the server has shut down.
+ 
+(Filename:  Line: 745)
 
