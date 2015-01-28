@@ -57,7 +57,8 @@ public class Music : MonoBehaviour {
 
     public void MuteMusic()
     {
-        source.Stop();
+        //source.Stop();
+        source.mute = !source.mute;
     }
 
 }

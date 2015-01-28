@@ -21,6 +21,11 @@ public class Game : MonoBehaviour {
 
 	private const string SENTENCE_VOTE = "Should we end this sentence?";
 	private const string GOAL_VOTE = "Was this goal accomplished?";
+	private const string SENTENCE = "SENTENCE_VOTE";
+	private const string GOAL = "GOAL_VOTE";
+	
+	private string mVoteType;
+	
     private int HandSizeLimit = 7;
     private int ScoringLimit = 10;
 
@@ -50,8 +55,7 @@ public class Game : MonoBehaviour {
     private bool mbIsMyTurn;
     private bool mbNextTurnReady;
     private Card mCurrentlySelectedCard;
-
-    public RectTransform mPlayerList;
+    
     
     public RectTransform mDropZone;
     public Text mPlayedText;
@@ -177,11 +181,6 @@ public class Game : MonoBehaviour {
 	        if (mbNextTurnReady)
 	        {
 	            currentPlayer = turnQueue.Dequeue();
-
-                // Highlight that player on the player list
-                GameLobby gl = mPlayerList.GetComponent<GameLobby>();
-                gl.HighlightPlayer(currentPlayer.playerName);
-
 	            //TURN LOGIC GOES HERE
 	            if (!mLocalPlayer.mPlayer.Equals (currentPlayer.mPlayer))
 	            {
@@ -460,6 +459,7 @@ public class Game : MonoBehaviour {
 
     void ProcessEndGame()
     {
+
         List<Player> ranking = new List<Player>(players);
 
         // sort by score
@@ -545,14 +545,22 @@ public class Game : MonoBehaviour {
 		}
 		else
 		{
-			votedPlayers.Add (mLocalPlayer);
-			if (vote)
+			if (!votedPlayers.Contains (mLocalPlayer))
 			{
-				mTallyFor++;
-			}
-			else
-			{
-				mTallyAgainst++;
+				votedPlayers.Add (mLocalPlayer);
+				if (vote)
+				{
+					mTallyFor++;
+				}
+				else
+				{
+					mTallyAgainst++;
+				}
+				
+				if (votedPlayers.Count == players.Count)
+				{
+					networkView.RPC ("RecieveResults", RPCMode.All, mTallyFor, mTallyAgainst);
+				}
 			}
 		}
 	}
