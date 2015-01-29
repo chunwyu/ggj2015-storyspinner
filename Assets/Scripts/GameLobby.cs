@@ -5,20 +5,29 @@ public class GameLobby : MonoBehaviour
 {
 	public InputField mPlayerNameJoin;
 	public InputField mPlayerNameHost;
-
-	private Player[] mPlayers;
-	private Player mLocalPlayer;
-	
+	public Player mLocalPlayer;
+	public GameObject mPlayerList;
+	public GameObject mPlayerDisplayPrefab;
+	public NetworkingController mNetworkController;
+		
+	private string[] mPlayers;
 	private int mPlayersConnected = 0;
 	
 	void Start ()
 	{
+		mNetworkController.RefreshHostList ();
+		if (Network.isServer)
+		{
+			mLocalPlayer.playerName = mPlayerNameHost.text;
+			mPlayers = new string[Network.maxConnections];
+			networkView.RPC("AddPlayer", RPCMode.All, mLocalPlayer.playerName);
+		}
 	}
 	
 	//Called on connection to server. Notifies server that a new player has joined game.
 	void OnConnectedToServer ()
 	{
-		mPlayers = new Player[Network.maxConnections];
+		mPlayers = new string[Network.maxConnections];
 		
 		if (Network.isClient)
 		{
@@ -29,26 +38,25 @@ public class GameLobby : MonoBehaviour
 			mLocalPlayer.playerName = mPlayerNameHost.text;
 		}
 		
-		networkView.RPC("AddPlayer", RPCMode.Server, mLocalPlayer.name);
+		networkView.RPC("AddPlayer", RPCMode.Server, mLocalPlayer.playerName);
 	}
 	
 	//Only called with RPCMode.Server
 	[RPC]
 	void AddPlayer (string playerName)
 	{
-		mPlayers[mPlayersConnected] = new Player ();
-		mPlayers[mPlayersConnected++].playerName = playerName;
+		mPlayers[mPlayersConnected++] = playerName;
 		
 		//Debug logging of connected players
-		Debug.Log ("Connected player: " + mPlayers[mPlayersConnected - 1].playerName);
+		Debug.Log ("Connected player: " + mPlayers[mPlayersConnected - 1]);
 		
-		string allPlayers = mPlayers[0].playerName;
-		for (int i = 0; i < mPlayersConnected; i++)
+		string allPlayers = mPlayers[0];
+		for (int i = 1; i < mPlayersConnected; i++)
 		{
-			allPlayers += "," + mPlayers[i].playerName;
+			allPlayers += "," + mPlayers[i];
 		}
 		
-		networkView.RPC ("RecievePlayers", RPCMode.Others, allPlayers);
+		networkView.RPC ("RecievePlayers", RPCMode.All, allPlayers);
 	}
 	
 	//Only called with RPCMode.Server
@@ -59,7 +67,7 @@ public class GameLobby : MonoBehaviour
 		
 		for (int i = 0; i < mPlayersConnected && !bPlayerFound; i++)
 		{
-			if (mPlayers[i].playerName.Equals (playerName))
+			if (mPlayers[i].Equals (playerName))
 			{
 				bPlayerFound = true;
 				mPlayersConnected--;
@@ -72,28 +80,30 @@ public class GameLobby : MonoBehaviour
 		
 		Debug.Log ("Disconnected player: " + playerName);
 		
-		string allPlayers = mPlayers[0].playerName;
-		for (int i = 0; i < mPlayersConnected; i++)
+		string allPlayers = mPlayers[0];
+		for (int i = 1; i < mPlayersConnected; i++)
 		{
-			allPlayers += "," + mPlayers[i].playerName;
+			allPlayers += "," + mPlayers[i];
 		}
 		
 		networkView.RPC ("RecievePlayers", RPCMode.Others, allPlayers);
 	}
 	
-	//Only called by server with RPCMode.Others
+	//Only called by server
 	[RPC]
 	void RecievePlayers (string allPlayers)
 	{
 		string[] playerNames = allPlayers.Split (',');
+
 		bool bNameFound;
 		//looking for a new player
 		foreach (string playerName in playerNames)
 		{
 			bNameFound = false;
-			foreach (Player player in mPlayers)
+			foreach (Transform child in mPlayerList.transform)
 			{
-				if (player.playerName.Equals (playerName))
+				PlayerDisplay display = child.GetComponent <PlayerDisplay> ();
+				if (display.GetName ().Equals (playerName))
 				{
 					bNameFound = true;
 				}
@@ -102,42 +112,36 @@ public class GameLobby : MonoBehaviour
 			//Here we have found a new player, so we add them to the player list.
 			if (!bNameFound)
 			{
-				mPlayers[mPlayersConnected] = new Player ();
-				mPlayers[mPlayersConnected++].playerName = playerName;
+				GameObject newListing = (GameObject) Instantiate (mPlayerDisplayPrefab);
+				PlayerDisplay newDisplay = newListing.GetComponent <PlayerDisplay> ();
+				newDisplay.SetName (playerName);
+				RectTransform newTransform = newListing.GetComponent <RectTransform> ();
+				//newTransform.localScale = new Vector3 (1,1,1);
+				newTransform.SetParent (mPlayerList.transform, false);
 			}
 		}
 		//looking for a player that was removed
-		foreach (Player player in mPlayers)
+		foreach (Transform child in mPlayerList.transform)
 		{
+			PlayerDisplay display = child.GetComponent <PlayerDisplay> ();
 			bNameFound = false;
 			
 			foreach (string playerName in playerNames)
 			{
-				if (playerName.Equals(player.playerName))
+				if (playerName.Equals(display.GetName ()))
 				{
 					bNameFound = true;
 				}
 			}
 			
 			if (!bNameFound)
-			{
-				for (int i = 0; i < mPlayersConnected && !bNameFound; i++)
-				{
-					if (mPlayers[i].playerName.Equals (player.playerName))
-					{
-						bNameFound = true;
-						mPlayersConnected--;
-						for (int j = i; j < Network.maxConnections - 1; j++)
-						{
-							mPlayers[j] = mPlayers[j + 1];
-						}
-					}
-				}
+			{	
+				Destroy (child.gameObject);
 			}
 		}
 	}
 	
-	public Player[] GetConnectedPlayers()
+	public string[] GetConnectedPlayers()
 	{
 		return mPlayers;
 	}

@@ -22,4 +22,9 @@ public class PlayerDisplay : MonoBehaviour
 	{
 		mDisplayText.text = name;
 	}
+	
+	public string GetName ()
+	{
+		return mDisplayText.text;
+	}
 }

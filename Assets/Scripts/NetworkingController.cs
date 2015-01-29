@@ -12,8 +12,6 @@ public class NetworkingController : MonoBehaviour
 	
 	private HostData [] mHostList;
 	
-	public InputField mPlayerNameJoin;
-	public InputField mPlayerNameHost;
 	public InputField mRoomName;
 	
 	public void RefreshHostList ()
@@ -37,10 +35,31 @@ public class NetworkingController : MonoBehaviour
 		}
 	}
 	
-	//Will join the best server (somehow). for now just joins first in list.
+	//Will join the best server (somehow). for now just joins first with empty slot in list.
 	public void JoinServer ()
 	{
-		Network.Connect (mHostList[0]);
+		bool bConnected = false;
+		
+		if (mHostList != null)
+		{
+			for (int i = 0; i < mHostList.Length && !bConnected; i++)
+			{
+				if (mHostList[i].connectedPlayers < mHostList[i].playerLimit)
+				{
+					Network.Connect (mHostList[i]);
+					bConnected = true;
+					Debug.Log ("Connecting to server " + mHostList[i].gameName);
+				}
+			}
+			if (!bConnected)
+			{
+				//No open spots in games, show error
+			}
+		}
+		else
+		{
+			//No currently existing games, show error
+		}
 	}
 	
 	public HostData[] GetHosts ()
@@ -69,6 +88,8 @@ public class NetworkingController : MonoBehaviour
 	{
 		DontDestroyOnLoad (this);
 		MasterServer.ipAddress = SERVER_IP;
+		
+		RefreshHostList ();
 	}
 	
 	void Update ()
