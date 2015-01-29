@@ -48,6 +48,7 @@ public class Game : MonoBehaviour {
     public InputField mPrefixInput;
     
     public GameObject mVotingPanel;
+    public Image mVotingImage;
     public Text mVotingText;
     public GameObject mTurnNotificationPanel;
 
@@ -55,6 +56,7 @@ public class Game : MonoBehaviour {
     
     private Player mLocalPlayer;
     private bool mbIsMyTurn;
+    private bool mbSentenceVoted;
     private bool mbNextTurnReady;
     private Card mCurrentlySelectedCard;
     
@@ -194,6 +196,7 @@ public class Game : MonoBehaviour {
 	            else
 	            {
 	            	mbIsMyTurn = true;
+	            	mbSentenceVoted = false;
 	            }
 	            
 	            turnQueue.Enqueue(currentPlayer);
@@ -207,6 +210,7 @@ public class Game : MonoBehaviour {
     void RecieveTurn ()
     {
     	mbIsMyTurn = true;
+    	mbSentenceVoted = false;
     }
 
     void LoadGame()
@@ -509,7 +513,7 @@ public class Game : MonoBehaviour {
     
 	public void StartEndSentenceVote ()
 	{
-		if (mbIsMyTurn)
+		if (mbIsMyTurn && !mbSentenceVoted)
 		{
 			//TODO: check some things here?
 			if (!Network.isServer)
@@ -520,6 +524,7 @@ public class Game : MonoBehaviour {
 			{
 				RequestSentenceVote ();
 			}
+			mbSentenceVoted = true;
 		}
 	}
 	
@@ -537,9 +542,20 @@ public class Game : MonoBehaviour {
 	{
 		mVotingPanel.SetActive (true);
 		mVotingText.text = SENTENCE_VOTE;
+		mVoteType = SENTENCE;
 		mTallyFor = mTallyAgainst = 0;
 	}
 	
+	//Run Everywhere
+	[RPC]
+	public void StartGoalVote (string goalCard)
+	{
+		CardData goalCardData = DataAccess.GetCardFromJSON (goalCard);
+		mVotingPanel.SetActive (true);
+		mVotingText.text = GOAL_VOTE;
+		mVoteType = GOAL;
+		mTallyFor = mTallyAgainst = 0;
+	}
 	
 	public void SubmitVote (bool vote)
 	{
@@ -567,6 +583,7 @@ public class Game : MonoBehaviour {
 				}
 			}
 		}
+		mVotingText.text = "Tallying Votes...";
 	}
 	
 	//Only Run on Server
@@ -605,6 +622,22 @@ public class Game : MonoBehaviour {
 	[RPC]
 	public void RecieveResults (int tallyFor, int tallyAgainst)
 	{
-		mVotingText.text = "Results are: " + tallyFor + " For, and " + tallyAgainst + " against.";
+		mVotingText.text = "Results are: " + tallyFor + " in favor, and " + tallyAgainst + " against.";
+		
+		if (Network.isServer)
+		{
+			if (mVoteType.Equals (SENTENCE))
+			{
+				if (tallyFor >= tallyAgainst)
+				{
+					gameState = GameState.ScoringVote;
+					networkView.RPC ("DistributeStory", RPCMode.All, mPlayedText.text + ". ");
+				}
+			}
+			else if (mVoteType.Equals (GOAL))
+			{
+				//WHAT DO WE DO WITH GOALS?
+			}
+		}
 	}
 }
