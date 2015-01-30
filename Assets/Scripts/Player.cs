@@ -11,7 +11,7 @@ public class Player : IComparable<Player> {
     public string playerName;
     public Game game;
     public NetworkPlayer mPlayer;
-    public int score;
+    public int score = 0;
 	
 	public Player ()
 	{

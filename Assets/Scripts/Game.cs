@@ -14,6 +14,7 @@ public enum GameState
     SetupBoard,
     MakeStory,
     ScoringVote,
+    VotesScored,
     GameEnd
 }
 
@@ -26,11 +27,12 @@ public class Game : MonoBehaviour {
 	
 	private string mVoteType;
 	
-    private int HandSizeLimit = 7;
-    private int ScoringLimit = 10;
+    private const int HAND_SIZE_LIMIT = 7;
+    private const int SCORING_LIMIT = 10;
 
     private List<Player> players;
     private Queue<Player> turnQueue;
+    private Queue<CardData> goalQueue;
     private List<Player> votedPlayers;
     public Player currentPlayer;
 
@@ -42,6 +44,7 @@ public class Game : MonoBehaviour {
     public GameObject mCardButtonObj;
     public GameObject mVoteCardObj;
     public GameObject mCardList;
+    public GameObject mGoalCardList;
     public GameObject mEndSentenceButton;
     
     public GameObject mPrefixPanel;
@@ -58,6 +61,7 @@ public class Game : MonoBehaviour {
     private bool mbIsMyTurn;
     private bool mbSentenceVoted;
     private bool mbNextTurnReady;
+    private bool mbNextVoteReady;
     private Card mCurrentlySelectedCard;
     
     
@@ -70,11 +74,13 @@ public class Game : MonoBehaviour {
     private bool winnerShown;
     
     private int mTallyFor, mTallyAgainst;
+    private CardData mCurrentVotingGoal;
 
 	// Use this for initialization
 	void Start () {
         deck = new List<CardData>();
         goalDeck = new List<CardData>();
+        goalQueue = new Queue<CardData> ();
         players = new List<Player>();
         votedPlayers = new List<Player> ();
         turnQueue = new Queue<Player>();
@@ -158,15 +164,19 @@ public class Game : MonoBehaviour {
         else if (gameState == GameState.ScoringVote)
         {
             ScoringVote();
-            //After votes:
-            foreach (Player p in players)
-            {
-                if (p.score > ScoringLimit)
-                {
-                    gameState = GameState.GameEnd;
-                }
-            }
-            gameState = GameState.MakeStory;
+        }
+        else if (gameState == GameState.VotesScored)
+        {
+			//After votes:
+			foreach (Player p in players)
+			{
+				if (p.score > SCORING_LIMIT)
+				{
+					gameState = GameState.GameEnd;
+				}
+			}
+			mVotingPanel.SetActive (false);
+			gameState = GameState.MakeStory;
         }
         else if (gameState == GameState.GameEnd)
         {
@@ -308,6 +318,23 @@ public class Game : MonoBehaviour {
 			}
     	}
     	
+    	foreach (CardData card in mLocalPlayer.goals)
+    	{
+			bCardFound = false;
+			foreach (Transform child in mGoalCardList.transform)
+			{
+				Card c = child.GetComponent <Card> ();
+				if (c.data.title.Equals (card.title))
+				{
+					bCardFound = true;
+				}
+			}
+			if (!bCardFound)
+			{
+				MakeNewGoalCardDisplay (card);
+			}
+    	}
+    	
     	mTurnNotificationPanel.SetActive (mbIsMyTurn);
     	mEndSentenceButton.SetActive (mbIsMyTurn);
 
@@ -392,7 +419,18 @@ public class Game : MonoBehaviour {
         Button cardButton = newCardObj.GetComponent <Button> ();
         cardButton.onClick.RemoveAllListeners ();
         cardButton.onClick.AddListener ( () => ClickEventMethod(cardButton));
-        
+    }
+    
+    void MakeNewGoalCardDisplay (CardData newCard)
+    {
+		GameObject newCardObj = (GameObject)GameObject.Instantiate(mCardButtonObj);
+		Card cardScript = newCardObj.GetComponent<Card>();
+		
+		RectTransform newTransform = newCardObj.GetComponent<RectTransform>();
+		newTransform.SetParent(mGoalCardList.transform, false);
+		
+		cardScript.data = newCard;
+		cardScript.Init(this, mDropZone);
     }
     
     [RPC]
@@ -435,7 +473,7 @@ public class Game : MonoBehaviour {
     	{
 	        foreach (Player p in players)
 	        {
-	            for (int i = p.hand.Count; i < HandSizeLimit; i++)
+	            for (int i = p.hand.Count; i < HAND_SIZE_LIMIT; i++)
 	            {
 	                DealCard(p);
 	            }
@@ -462,12 +500,25 @@ public class Game : MonoBehaviour {
 
     void ScoringVote()
     {
-
+		if (mbNextVoteReady)
+		{	
+			votedPlayers.Clear ();
+			if (goalQueue.Count > 0)
+			{
+				mCurrentVotingGoal = goalQueue.Dequeue ();
+				
+				networkView.RPC ("StartGoalVote", RPCMode.All, DataAccess.GetJSONfromCard (mCurrentVotingGoal));
+			}
+			else
+			{
+				gameState = GameState.VotesScored;
+			}
+			mbNextVoteReady = false;
+		}
     }
 
     void ProcessEndGame()
     {
-
         List<Player> ranking = new List<Player>(players);
 
         // sort by score
@@ -559,6 +610,7 @@ public class Game : MonoBehaviour {
 	
 	public void SubmitVote (bool vote)
 	{
+		mVotingText.text = "Tallying Votes...";
 		if (Network.isClient)
 		{
 			networkView.RPC ("RecieveVote", RPCMode.Server, vote);
@@ -583,7 +635,7 @@ public class Game : MonoBehaviour {
 				}
 			}
 		}
-		mVotingText.text = "Tallying Votes...";
+
 	}
 	
 	//Only Run on Server
@@ -632,11 +684,35 @@ public class Game : MonoBehaviour {
 				{
 					gameState = GameState.ScoringVote;
 					networkView.RPC ("DistributeStory", RPCMode.All, mPlayedText.text + ". ");
+					mbNextVoteReady = true;
+					
+					//Add all goal cards to goal queue
+					foreach (Player p in players)
+					{
+						foreach (CardData data in p.goals)
+						{
+							goalQueue.Enqueue (data);
+						}
+					}
 				}
 			}
 			else if (mVoteType.Equals (GOAL))
 			{
 				//WHAT DO WE DO WITH GOALS?
+				if (tallyFor >= tallyAgainst)
+				{
+					foreach (Player p in players)
+					{
+						foreach (CardData goal in p.goals)
+						{
+							if (mCurrentVotingGoal.title.Equals (goal.title))
+							{
+								p.score++;
+							}
+						}
+					}
+				}
+				mbNextVoteReady = true;
 			}
 		}
 	}
