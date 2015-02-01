@@ -28,7 +28,7 @@ public class Game : MonoBehaviour {
 	private string mVoteType;
 	
     private const int HAND_SIZE_LIMIT = 7;
-    private const int SCORING_LIMIT = 10;
+    private const int SCORING_LIMIT = 2;
 
     private List<Player> players;
     private Queue<Player> turnQueue;
@@ -51,7 +51,7 @@ public class Game : MonoBehaviour {
     public InputField mPrefixInput;
     
     public GameObject mVotingPanel;
-    public Image mVotingImage;
+    public Text mVotingGoalText;
     public Text mVotingText;
     public GameObject mTurnNotificationPanel;
 
@@ -94,12 +94,13 @@ public class Game : MonoBehaviour {
         winnerShown = false;
         mbNextTurnReady = true;
 
-        SFXsource = (AudioSource)gameObject.AddComponent("SFXSource");
+		SFXsource = (AudioSource)gameObject.AddComponent("AudioSource");
 	}
 
     public void PlaySFX(string resourceName)
     {
-        SFXsource.PlayOneShot((AudioClip)Resources.Load("SFX/" + resourceName));
+    	AudioClip playClip = Resources.Load ("SFX/" + resourceName) as AudioClip;
+        SFXsource.PlayOneShot(playClip, 300);
     }
 
     public void AddPlayer(string name, NetworkPlayer player)
@@ -185,6 +186,8 @@ public class Game : MonoBehaviour {
 				}
 			}
 			mVotingPanel.SetActive (false);
+			mVotingText.text = "";
+			networkView.RPC ("EndVotingPhase", RPCMode.All);
 			gameState = GameState.MakeStory;
         }
         else if (gameState == GameState.GameEnd)
@@ -195,6 +198,13 @@ public class Game : MonoBehaviour {
             }
             winnerShown = true;
         }
+	}
+
+	[RPC]
+	public void EndVotingPhase ()
+	{
+		mVotingPanel.SetActive (false);
+		mVotingText.text = "";
 	}
 
     void ProcessTurn()
@@ -614,6 +624,7 @@ public class Game : MonoBehaviour {
 		CardData goalCardData = DataAccess.GetCardFromJSON (goalCard);
 		mVotingPanel.SetActive (true);
 		mVotingText.text = GOAL_VOTE;
+		mVotingGoalText.text = goalCardData.description; 
 		mVoteType = GOAL;
 		mTallyFor = mTallyAgainst = 0;
 	}
