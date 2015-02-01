@@ -28,7 +28,7 @@ public class Game : MonoBehaviour {
 	private string mVoteType;
 	
     private const int HAND_SIZE_LIMIT = 7;
-    private const int SCORING_LIMIT = 2;
+    private const int SCORING_LIMIT = 1;
 
     private List<Player> players;
     private Queue<Player> turnQueue;
@@ -188,7 +188,10 @@ public class Game : MonoBehaviour {
 			mVotingPanel.SetActive (false);
 			mVotingText.text = "";
 			networkView.RPC ("EndVotingPhase", RPCMode.All);
-			gameState = GameState.MakeStory;
+			if (gameState != GameState.GameEnd)
+			{
+				gameState = GameState.MakeStory;
+			}
         }
         else if (gameState == GameState.GameEnd)
         {
