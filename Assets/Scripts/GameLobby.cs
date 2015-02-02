@@ -9,6 +9,8 @@ public class GameLobby : MonoBehaviour
 	public GameObject mPlayerList;
 	public GameObject mPlayerDisplayPrefab;
 	public NetworkingController mNetworkController;
+	public Animator mPlayerListAnimation;
+	public Button mStartButton;
 		
 	private string[] mPlayers;
 	private int mPlayersConnected = 0;
@@ -21,6 +23,7 @@ public class GameLobby : MonoBehaviour
 			mLocalPlayer.playerName = mPlayerNameHost.text;
 			mPlayers = new string[Network.maxConnections];
 			networkView.RPC("AddPlayer", RPCMode.All, mLocalPlayer.playerName);
+			mStartButton.gameObject.SetActive (true);
 		}
 	}
 	
@@ -115,9 +118,15 @@ public class GameLobby : MonoBehaviour
 				GameObject newListing = (GameObject) Instantiate (mPlayerDisplayPrefab);
 				PlayerDisplay newDisplay = newListing.GetComponent <PlayerDisplay> ();
 				newDisplay.SetName (playerName);
+				newDisplay.SetLobby (this);
 				RectTransform newTransform = newListing.GetComponent <RectTransform> ();
 				//newTransform.localScale = new Vector3 (1,1,1);
 				newTransform.SetParent (mPlayerList.transform, false);
+				
+				if (newDisplay.GetName ().Equals (mLocalPlayer.playerName))
+				{
+					newDisplay.SetInteractableToggle (true);
+				}
 			}
 		}
 		//looking for a player that was removed
@@ -141,6 +150,24 @@ public class GameLobby : MonoBehaviour
 		}
 	}
 	
+	public void ChangeReadyStatus (bool bReady, string playerName)
+	{
+		networkView.RPC ("RPCReadyStatus", RPCMode.All, bReady, playerName);
+	}
+	
+	[RPC]
+	public void RPCReadyStatus (bool bReady, string playerName)
+	{
+		foreach (Transform child in mPlayerList.transform)
+		{
+			PlayerDisplay display = child.GetComponent <PlayerDisplay> ();
+			if (display.GetName ().Equals (playerName))
+			{
+				display.SetReady (bReady);
+			}
+		}
+	}
+	
 	public string[] GetConnectedPlayers()
 	{
 		return mPlayers;
@@ -153,7 +180,33 @@ public class GameLobby : MonoBehaviour
 	
 	void Update()
 	{
+
+	}
 	
+	public void StartGame ()
+	{
+		bool bAllReady = true;
+		
+		foreach (Transform child in mPlayerList.transform)
+		{
+			PlayerDisplay display = child.GetComponent <PlayerDisplay> ();
+			if (!display.GetReady ())
+			{
+				bAllReady = false;
+			}
+		}
+		
+		if (bAllReady)
+		{
+			//CODE TO START GAME
+			ActivateMenu ();
+			mStartButton.gameObject.SetActive (false);
+		}
+	}
+	
+	public void ActivateMenu ()
+	{
+		mPlayerListAnimation.SetBool ("IsActive", true);
 	}
 	
 }
